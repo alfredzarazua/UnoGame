@@ -250,8 +250,11 @@ public class GameRoom{
         //y muestra nueva carta
         nuevaCarta();
         if(players.get(turno).getSizeCartas()==0){
-           /////////////////////////////////////////////////777mensaje acaba el juego 
-           return 1; 
+            List<String> message = new ArrayList<>();
+            message.add("ok");
+           Message msg = new Message("T", -1, message );
+           sendMessageToRoomMembers(msg);
+           return 2;
         }
         juegoCartas.regresaCartaUsuario(carta);
         if ( diccionario[cartaMesa].getTipo()==0 ){// si la crta es especial 

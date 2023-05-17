@@ -10,6 +10,8 @@ import clientuno.modelo.StageData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -54,13 +56,17 @@ public class GameController {
     private Label jugador3;
     @FXML
     private Label jugador4;
+    
+    @FXML
+    private GridPane gridPane; 
    
     
     public void inicializarPartida(){                         
         Seleccion_color.setDisable(true);
         Seleccion_color.setVisible(false);
         nombre_ganador.setVisible(false);
-        Toma_carta.setDisable(true);   
+        Toma_carta.setDisable(true);  
+        gridPane.setDisable(false);
         //insertarJugadores();
     }
     
@@ -72,34 +78,39 @@ public class GameController {
     
     //Recibe una lista de Strings, con los numeros de las cartas a renderizar
     //Por ejemplo {1,2,4,5,19,6,12,30}
-    public void cardClick(String cardId) {
+    public void cardClick(String cardId) throws IOException {
         List<String> params = new ArrayList<>();
         params.add("ok");
         params.add(cardId);
         Message msg = new Message("K", 0, params);
         
-        /*
+        System.out.println("HOlA");
+        
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(msg);
-        */
-        
     }
     
     public void showUsernames( List<String> usernames){
          jugador1.setText(usernames.get(0));
          jugador2.setText(usernames.get(1));
-         if(usernames.size()>=2){
+         
+         if(usernames.size()>2){
+             System.out.println("tamaño user"+ usernames.size());
              jugador3.setText(usernames.get(2));
-             if(usernames.size()==3){
+             if(usernames.size()==4){
              jugador4.setText(usernames.get(3));     
             }else{
-                 jugador4.setText("");
+                 jugador4.setText(" ");
              }
          }else{
-             jugador3.setText("");
-             jugador4.setText("");
+             jugador3.setText(" ");
+             jugador4.setText(" ");
          }
     }
+    
+     public void habilitablockCartas(){
+         gridPane.setDisable(false);
+     }
     
      public void habilitaSeleccionColor(){
          Seleccion_color.setDisable(false);
@@ -119,7 +130,7 @@ public class GameController {
     public void renderUNOCards(List<Integer> cards){
         String imagePath = "../cartas/";
         
-        GridPane gridPane = new GridPane(); //Cuadricula 7xN 
+        gridPane = new GridPane(); //Cuadricula 7xN 
         gridPane.setVgap(10);  //Margenes de las cartas
         gridPane.setHgap(10);        
         
@@ -131,8 +142,12 @@ public class GameController {
             System.out.println(path);
             ImageView imageView1 = new ImageView(getClass().getResource(path).toExternalForm()); 
             imageView1.setOnMouseClicked(event -> {
-                // Evento de click en la carta
-                cardClick( Integer.toString(card));
+                try {
+                    // Evento de click en la carta
+                    cardClick( Integer.toString(card));
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });
             imageView1.setId(Integer.toString(card));
             imageView1.setFitWidth(74); 

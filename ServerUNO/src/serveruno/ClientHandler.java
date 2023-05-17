@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable{
     ObjectOutputStream out;
     ClientManager manager; //solo es para acceso a metodos de la clase
     List<Integer> cartas = new ArrayList<>(); //cartas de cada u 
-    private String userName; 
+    private String userName= "si jala"; 
     
     
     //agrega carta al u

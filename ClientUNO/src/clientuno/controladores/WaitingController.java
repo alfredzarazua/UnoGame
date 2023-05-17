@@ -53,8 +53,10 @@ public class WaitingController {
         
         GameController controller = loader.getController();
         data.partida.setController(controller);
+        controller.stage = stage; 
         controller.renderUNOCards(data.partida.cartas);
         controller.inicializarPartida();
+        controller.showUsernames(data.partida.getUsernames());
         stage.show(); 
         
     }
