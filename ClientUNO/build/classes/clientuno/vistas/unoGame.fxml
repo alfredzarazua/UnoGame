@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1169.0" style="-fx-background-color: #B1a79b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.GameController">
+   <children>
+      <Pane fx:id="Seleccion_color" layoutX="313.0" layoutY="112.0" prefHeight="144.0" prefWidth="314.0" style="-fx-background-color: #C1b7aa;">
+         <children>
+            <Label layoutX="89.0" layoutY="6.0" text="Seleccione el color">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="Color_Amarillo" layoutX="6.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonAmarillo" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #ffa800;" text="Amarillo" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="Color_Azul" layoutX="82.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonAzul" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #5354fe;" text="Azul" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="Color_Rojo" layoutX="158.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonRojo" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #fe5454;" text="Rojo" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="Color_Verde" layoutX="235.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonVerde" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #54a954;" text="Verde">
+               <font>
+                  <Font name="Calibri" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="632.0" layoutY="26.0" prefHeight="648.0" prefWidth="530.0" style="-fx-background-color: #C1b7aa;">
+         <children>
+            <Pane layoutY="-1.0" prefHeight="128.0" prefWidth="530.0" style="-fx-background-color: #ed1c24;">
+               <children>
+                  <ImageView fitHeight="109.0" fitWidth="144.0" layoutX="385.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Imagenes/Juego%20uno.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="71.0" layoutY="44.0" text="Juego de la Sala">
+                     <font>
+                        <Font name="Calibri" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView fx:id="Carta_Juego" fitHeight="337.0" fitWidth="230.0" layoutX="14.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imagenes/Cambio_de_Color.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="54.0" layoutY="258.0" text="Carta en juego">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="Toma_Carta" contentDisplay="GRAPHIC_ONLY" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" prefHeight="331.0" prefWidth="254.0" style="-fx-background-color: #C1b7aa;" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fx:id="Toma_carta" fitHeight="337.0" fitWidth="249.0">
+                     <image>
+                        <Image url="@Imagenes/Reverso.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="322.0" layoutY="258.0" text="Tomar Carta">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="54.0" layoutY="156.0" text="Es el turno de:">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="Nombre_turno_actual" layoutX="179.0" layoutY="156.0" text="*NOMBRE DEL JUGADOR*">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="nombre_ganador" layoutX="159.0" layoutY="207.0" text="*Se muestra el ganador*">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="220.0" layoutY="36.0" style="-fx-background-color: #C1b7aa;" text="Sala N° 1">
+         <font>
+            <Font name="Calibri" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="Salir_Sala" layoutX="21.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #Ff0000;" text="&lt;- Salir" textAlignment="CENTER">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Pane layoutX="14.0" layoutY="112.0" prefHeight="144.0" prefWidth="209.0" style="-fx-background-color: #C1b7aa;">
+         <children>
+            <Label layoutX="30.0" layoutY="3.0" text="Jugadores en la Sala">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="jugador1" layoutX="14.0" layoutY="34.0" text="Jugador 1" />
+            <Label fx:id="jugador2" layoutX="14.0" layoutY="57.0" text="Jugador 2" />
+            <Label fx:id="jugador3" layoutX="14.0" layoutY="80.0" text="Jugador 3" />
+            <Label fx:id="jugador4" layoutX="14.0" layoutY="104.0" text="Jugador 4" />
+         </children>
+      </Pane>
+      <ScrollPane fx:id="Cartas_juego" layoutX="14.0" layoutY="263.0" prefHeight="410.0" prefWidth="613.0" style="-fx-background-color: #C1b7aa;" vbarPolicy="ALWAYS" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="DISAPPEAR" />
+   </cursor>
+   <effect>
+      <InnerShadow choke="0.12" height="42.99" radius="19.1625" width="35.66">
+         <color>
+            <Color red="0.07894736528396606" green="0.07894736528396606" blue="0.07894736528396606" />
+         </color>
+      </InnerShadow>
+   </effect>
+</AnchorPane>

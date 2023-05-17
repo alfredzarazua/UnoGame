@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.LoginController">
+   <left>
+      <AnchorPane prefHeight="530.0" prefWidth="251.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="595.0" fitWidth="530.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Juegouno.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="530.0" prefWidth="482.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="102.0" fitWidth="97.0" layoutX="137.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Candado.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="158.0" layoutY="34.0" text="LogIn">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="52.0" layoutY="201.0" text="UserName" textFill="#ed1c24">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="52.0" layoutY="252.0" text="Password" textFill="#ed1c24">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="TextFieldNombre" layoutX="172.0" layoutY="203.0" promptText="Username" />
+            <PasswordField fx:id="TextFieldContraseña" layoutX="172.0" layoutY="253.0" promptText="Password" />
+            <Button layoutX="112.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="149.0" style="-fx-background-color: #218d38;" text="LogIn" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="77.0" layoutY="460.0" text="You don't have an account,">
+               <font>
+                  <Font name="Calibri Bold" size="13.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="224.0" layoutY="457.0" onAction="#loadRegisterForm" text="create one!" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Bold" size="13.0" />
+               </font></Hyperlink>
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="290.0" prefHeight="17.0" prefWidth="271.0" text="Login error message" textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Calibri Bold" size="13.0" />
+               </font>
+            </Label>
+            <ProgressIndicator fx:id="spinner" blendMode="EXCLUSION" layoutX="172.0" layoutY="387.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

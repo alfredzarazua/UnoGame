@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.InstructionsController">
+   <top>
+      <AnchorPane prefHeight="85.0" prefWidth="600.0" style="-fx-background-color: #0060b0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="289.0" layoutY="5.0" text="Instructions" textFill="#000001">
+               <font>
+                  <Font name="Calibri Bold" size="65.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="62.0" fitWidth="81.0" layoutX="744.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Juego%20uno.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="62.0" fitWidth="81.0" layoutX="59.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Juego%20uno.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="623.0" prefWidth="898.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="114.0" layoutY="14.0" text="Types of Cards">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="104.0" fitWidth="66.0" layoutX="23.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="66.0" layoutX="23.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Mas_Dos.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="66.0" layoutX="23.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Negacion.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="66.0" layoutX="23.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Reversa.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="66.0" layoutX="381.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Cambio_de_Color.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="66.0" layoutX="381.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Mas_Cuatro.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="104.0" layoutY="51.0" prefHeight="135.0" prefWidth="262.0" text="Numbered cards (Card type: Numbers): These cards represent numbers from 0 to 9. The objective is to discard all the cards in your hand of the same color and number corresponding to the card on the top of the deck." wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="107.0" layoutY="454.0" prefHeight="121.0" prefWidth="274.0" text="Reverse&quot; cards (Card type: Action): These cards have an arrow pointing to the left and change the direction of the game. For example, if the game was progressing clockwise, the person playing this card can change it to counterclockwise." wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="104.0" layoutY="317.0" prefHeight="127.0" prefWidth="281.0" text="Jump cards (Card type: Action): These cards have a crossed out circle in the center and allow you to jump to the next player in the sequence. For example, if a jump card is played after a red 7 card, the next player (clockwise) would have to play a 7 card of the same color or a jump card." wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="104.0" layoutY="188.0" prefHeight="134.0" prefWidth="272.0" text="Take Two&quot; cards (Card type: Action): These cards have a plus sign symbol and &quot;2&quot; in the center. When playing a &quot;take two&quot; card, the next player has to draw two cards from the deck and lose his turn." wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="457.0" layoutY="68.0" prefHeight="100.0" prefWidth="241.0" text="Joker Color Change Cards (Card Type: Joker): These cards have a picture of the colors in the center and can be played on your turn. The player who plays a &quot;Joker&quot; card can choose the color to be played next." wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="457.0" layoutY="192.0" prefHeight="129.0" prefWidth="279.0" text="Joker take four cards (Card type: Joker): These cards have a picture of the four colors and a &quot;take four&quot; symbol. By playing this card, the player chooses the color to be played next and the next player has to draw four cards from the deck and lose his turn." wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="return_to" layoutX="715.0" layoutY="553.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="48.0" prefWidth="169.0" style="-fx-background-color: #218d38;" text="Return " textFill="#000001">
+               <font>
+                  <Font name="Calibri Bold" size="25.0" />
+               </font>
+            </Button>
+            <Label layoutX="435.0" layoutY="337.0" prefHeight="215.0" prefWidth="428.0" text="-All cards are shuffled and seven cards are dealt to each player.&#10;-The top card of the deck is placed face up in the center of the table.&#10;-The player to the left of the dealer starts the game and must try to discard a card that has the same number or color as the starting card. If he does not have a card to play, he must take a card from the deck.&#10;-If a player plays an action or joker card, the effect of the card is carried out.&#10;-Play continues until a player runs out of cards in his hand.&#10;-The first player to have 0 cards left in his hand wins." textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="589.0" layoutY="323.0" text="How to play">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <ProgressIndicator fx:id="spinner" blendMode="DARKEN" cache="true" cacheHint="QUALITY" depthTest="ENABLE" layoutX="670.0" layoutY="560.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

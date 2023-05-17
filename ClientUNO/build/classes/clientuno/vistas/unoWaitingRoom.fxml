@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.WaitingController">
+   <center>
+      <AnchorPane prefHeight="491.0" prefWidth="733.0" style="-fx-background-color: #231c1b;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="553.0" fitWidth="810.0" layoutY="23.0" opacity="0.36" pickOnBounds="true">
+               <image>
+                  <Image url="@../Imagenes/FondoUno.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="207.0" layoutY="282.0" prefHeight="35.0" prefWidth="396.0" text="Waiting for others players to join..." textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="23.0" />
+               </font>
+            </Label>
+            <ProgressIndicator fx:id="spinner" blendMode="ADD" cache="true" cacheHint="QUALITY" depthTest="ENABLE" layoutX="391.0" layoutY="327.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
+            <Label layoutX="348.0" layoutY="450.0" text="Connected:" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelActiveUsers" layoutX="442.0" layoutY="450.0" text="0/4" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="botonIniciarPartida" layoutX="332.0" layoutY="482.0" mnemonicParsing="false" onAction="#solicitarInicioPartida" prefHeight="34.0" prefWidth="146.0" style="-fx-background-color: #54a954;" text="Iniciar Partida" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.HomeController">
+   <top>
+      <AnchorPane prefHeight="106.0" prefWidth="530.0" style="-fx-background-color: #ed1c24;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="153.0" layoutY="36.0" text="Welcome:" textFill="#fadf0e">
+               <font>
+                  <Font name="Calibri Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="username" layoutX="286.0" layoutY="36.0" text="*Nombre del usuario*" textFill="#fadf0e">
+               <font>
+                  <Font name="Calibri Bold Italic" size="30.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="85.0" fitWidth="136.0" layoutX="607.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Juego%20uno.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <right>
+      <AnchorPane prefHeight="385.0" prefWidth="311.0" style="-fx-background-color: #0060b0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="77.0" layoutY="14.0" prefHeight="35.0" prefWidth="157.0" text="Ready to play" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="59.0" prefHeight="23.0" prefWidth="53.0" text="Rooms:" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <Pane layoutX="14.0" layoutY="81.0" prefHeight="173.0" prefWidth="285.0" style="-fx-background-color: #0060b0;">
+               <children>
+                  <Label fx:id="roomLabel1" layoutX="14.0" layoutY="14.0" text="Room 1" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="14.0" layoutY="49.0" text="Room 2" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="14.0" layoutY="84.0" text="Room 3" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="14.0" layoutY="119.0" text="Room 4" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="playersLabel1" layoutX="88.0" layoutY="14.0" text="0/4" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="88.0" layoutY="49.0" text="0/4" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="88.0" layoutY="84.0" text="0/4" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="88.0" layoutY="119.0" text="0/4" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btn1" layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#requestToJoinRoom" prefHeight="16.0" prefWidth="57.0" text="join">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button disable="true" layoutX="214.0" layoutY="45.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="57.0" text="join">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button disable="true" layoutX="214.0" layoutY="80.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="57.0" text="join">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button disable="true" layoutX="214.0" layoutY="115.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="57.0" text="join">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="idLabel1" layoutX="147.0" layoutY="14.0" text="AAAAAA" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="147.0" layoutY="49.0" text="AAAAAA" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="147.0" layoutY="84.0" text="AAAAAA" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label disable="true" layoutX="147.0" layoutY="119.0" text="AAAAAA" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="errorLabel" alignment="CENTER" layoutX="11.0" layoutY="147.0" prefHeight="17.0" prefWidth="261.0" text="Error Message" textFill="#f86e6e">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="91.0" layoutY="58.0" prefHeight="23.0" prefWidth="53.0" text="Players:" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="100.0" layoutY="334.0" mnemonicParsing="false" onAction="#instructionsButton" text="Game Instructions" />
+            <Label layoutX="178.0" layoutY="61.0" text="Id:" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <ProgressIndicator fx:id="spinner" blendMode="SCREEN" layoutX="143.0" layoutY="266.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <AnchorPane prefHeight="357.0" prefWidth="522.0" style="-fx-background-color: #231c1b;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="385.0" fitWidth="508.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Imagenes/FondoUno.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
