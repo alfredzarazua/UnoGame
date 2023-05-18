@@ -85,7 +85,7 @@
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="Toma_Carta" contentDisplay="GRAPHIC_ONLY" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" prefHeight="331.0" prefWidth="254.0" style="-fx-background-color: #C1b7aa;" textAlignment="CENTER">
+            <Button fx:id="Toma_Carta" contentDisplay="GRAPHIC_ONLY" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" onAction="#presionaBotonComida" prefHeight="331.0" prefWidth="254.0" style="-fx-background-color: #C1b7aa;" textAlignment="CENTER">
                <graphic>
                   <ImageView fx:id="Toma_carta" fitHeight="337.0" fitWidth="230.0" preserveRatio="true">
                      <image>

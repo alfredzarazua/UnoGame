@@ -233,7 +233,8 @@ public class ClientHandler implements Runnable{
                                    response.add(Integer.toString(ans));
                                    resp = new Message("L", -1, response);
                                    sendMessage(resp);
-                              }else{
+                              }else if(ans == 1){
+                                   
                                    currentRoom2.aumentoTurno();
                                    currentRoom2.nuevoTurno();
                                }

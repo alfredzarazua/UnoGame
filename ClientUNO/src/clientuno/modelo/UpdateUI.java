@@ -64,7 +64,9 @@ public class UpdateUI extends Task<Void>{
                 case 6 -> partida.rejectedJoinToRoom(msg);       //Mostrar mensaje de error
                 case 7 -> partida.updateActiveUsersInRoom();     //Actualizar numero de usuarios
                 case 8 -> partida.openGameView();                //ir a ventana de juego
-                case 9 -> partida.setTurnData();
+                case 9 -> partida.setTurnData();                 //Actualizar turno actual
+                case 10 -> partida.updateCards();                //Actualizar cartas del usuario
+                case 11 -> partida.updateCartaMesa();            //Actualizar Carta de mesa
             }
         });                               
         return null;                        

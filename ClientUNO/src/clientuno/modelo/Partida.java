@@ -141,9 +141,7 @@ public class Partida extends ClientUNO{
         }        
     }
     //Saltar a la ventana de juego
-    public void openGameView(){
-        System.out.println("Current is:"+loader.getController().getClass());
-        System.out.println("Should be WaitingController");
+    public void openGameView(){        
         WaitingController controller = loader.getController();
         try{
             controller.loadGameView();
@@ -202,8 +200,8 @@ public class Partida extends ClientUNO{
             cartas.add(Integer.valueOf(car.get(i)));
         }
 
-        GameController controller = loader.getController();
-        controller.renderUNOCards(cartas);        
+        /*GameController controller = loader.getController();  //Genera Excepcion not the UI thread
+        controller.renderUNOCards(cartas);   //fallo */    
     }
     
     public void igualarJuegoCartas(List<String> car){
@@ -253,7 +251,7 @@ public class Partida extends ClientUNO{
             //manda mensaje de que le toca castigo
    
         }else{
-               // activa cartas 
+               
            } 
         }  
     }
@@ -265,13 +263,29 @@ public class Partida extends ClientUNO{
         cartas.add(carta);
     }
     
-    //caso j
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //UI UPDATES
+    
+    //actualizar carta de la mesa
+    public void updateCartaMesa(){
+                
+        GameController controller = loader.getController();                        
+        controller.renderCartaActual(cartaMesa);                                  
+    }
+    
+    //caso j  actualizar turno de juego
     public void setTurnData(){
         System.out.println("Turno: "+turnoActual);
         
-        GameController controller = loader.getController();                        
-        controller.renderCartaActual(cartaMesa);                        
+        GameController controller = loader.getController();                                                       
         controller.renderTurnoActual(usernames.get(turnoActual));        
+    }
+    
+    //Actualizar todas las cartas del usuario
+    public void updateCards(){
+        GameController controller = loader.getController();                        
+        controller.renderUNOCards(cartas);
     }
     
     

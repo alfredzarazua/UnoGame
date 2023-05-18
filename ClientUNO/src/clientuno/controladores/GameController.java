@@ -74,8 +74,8 @@ public class GameController {
         Seleccion_color.setDisable(true);
         Seleccion_color.setVisible(false);
         nombre_ganador.setVisible(false);
-        Toma_carta.setDisable(true);  
-        gridPane.setDisable(false);
+        //Toma_carta.setDisable(true);  
+        //gridPane.setDisable(false);
         Tooltip tooltip = new Tooltip("Tomar una carta");
         Tooltip.install(Toma_carta, tooltip);
         //insertarJugadores();
@@ -225,6 +225,16 @@ public class GameController {
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(message);
     }
+    
+    public void presionaBotonComida(ActionEvent event) throws Exception{
+        List<String> msg = new ArrayList<>();
+        msg.add("ok");        
+        //manda numero 
+        Message message= new Message("O", -1,msg);
+        StageData data = (StageData) stage.getUserData();
+        data.connection.sendMessage(message);
+    }
+    
     
     
      

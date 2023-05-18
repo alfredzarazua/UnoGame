@@ -94,7 +94,7 @@ public class ServerListener implements Runnable{
                         }                                                    
                         break; 
                     case "F":
-                        //manda turno de usuario
+                        //recibe turno de usuario(el propio) no el actual
                         if(msg.parameters.get(0).equals("ok")){
                             partida.setPartida(Integer.parseInt(msg.parameters.get(1)));
                         }
@@ -104,7 +104,7 @@ public class ServerListener implements Runnable{
                         if(msg.parameters.get(0).equals("ok")){
                             partida.igualarJuegoCartas(msg.parameters);
                             //Cargar cartas
-                            //new Thread(new UpdateUI(partida, 3)).start(); 
+                            new Thread(new UpdateUI(partida, 10)).start(); 
                         }
                         break;
                     case "H"://                                                 Lista de usuarios 
@@ -123,12 +123,12 @@ public class ServerListener implements Runnable{
                         break;
                         
                     case "J":                                                   //carta mesa/turno actual/bandera
-                        //actualiza carta de la mesa y turno 
-                        //crear hilos para cargar esto
+                        //actualiza carta de la mesa y turno                         
                         if(msg.parameters.get(0).equals("ok")){
                            partida.setCartaMesa(Integer.parseInt(msg.parameters.get(1)));
-                           partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(1)),Boolean.parseBoolean(msg.parameters.get(2)));
-                           new Thread(new UpdateUI(partida, 9)).start();
+                           partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(2)),Boolean.parseBoolean(msg.parameters.get(3)));
+                           new Thread(new UpdateUI(partida, 9)).start();//turno actual
+                           new Thread(new UpdateUI(partida, 11)).start();//carta de la mesa
                         }
                         break;
                     case "K": // funvion manda al servidor 
@@ -147,26 +147,31 @@ public class ServerListener implements Runnable{
                         //nueva carta
                         if(msg.parameters.get(0).equals("ok")){
                             partida.setCartaMesa(Integer.parseInt(msg.parameters.get(1)));
+                            new Thread(new UpdateUI(partida, 11)).start();
                         }
                         break;
                     case "N":
                         //nueva turno
                         if(msg.parameters.get(0).equals("ok")){
                             partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(1)),Boolean.parseBoolean(msg.parameters.get(2)));
-                            
+                            new Thread(new UpdateUI(partida, 9)).start(); 
                         }
                         break;
                     case "P": 
                         if(msg.parameters.get(0).equals("ok")){
                             partida.setJuegoCarta(Integer.parseInt((msg.parameters.get(1))));
-
+                            new Thread(new UpdateUI(partida, 10)).start();
                         }
                         break;
                     case "S":
                         if(msg.parameters.get(0).equals("ok")){
                             partida.setJuegoCartas(msg.parameters);
-                            
+                            new Thread(new UpdateUI(partida, 10)).start();//actualizar cartas del jugador
                         }
+                        break;
+                    case "T": //Termina juego
+                        break;
+                    
                 }
             }
         } 

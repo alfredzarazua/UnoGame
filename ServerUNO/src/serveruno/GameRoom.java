@@ -115,19 +115,22 @@ public class GameRoom{
         inicializarInfo();//manda turno actul, carta mesa, bandera
        for(int j=0; j<activeUsers; j++){
             darTurno(j);  //mandamos turnos especificos
-            ClientHandler player = players.get(j);
+             reenvioCartasU(j);
+            //}catch(IOException){}
+        }
+    }
+    
+   public void reenvioCartasU(int j) throws IOException{
+       ClientHandler player = players.get(j);
              List<String> cartas = new ArrayList<>();
              cartas.add("ok");
-            //condicional 
-            //try{
             for(int i=0; i<player.getSizeCartas(); i++){
                 cartas.add(Integer.toString(player.getCarta(i)));
             }
             Message message= new Message("G", -1, cartas );
-            player.sendMessage(message);  
-            //}catch(IOException){}
-        }
-    }
+            player.sendMessage(message); 
+       
+   }
     public void inicializarInfo() throws IOException{
         List<String> message = new ArrayList<>();
         message.add("ok");
@@ -218,31 +221,31 @@ public class GameRoom{
         message.add(Boolean.toString(bandera));
         Message msg = new Message("N", -1, message );
         sendMessageToRoomMembers(msg);  
-   }
+    }
+    //Revisar, devuelve turno 49 para 2 usuarios
     public void aumentoTurno(){
         if(turno+aumento>players.size()-1){
            turno= 0;
-       }else if(turno+aumento<0){
+        }else if(turno+aumento<0){
            turno= players.size()-1;
-       }else{
+        }else{
            turno= turno + aumento;
-       } 
+        } 
     }
     
     
     public void eliminarCartaCliente(int num) throws IOException{
-        List<String> carta = new ArrayList<>();
-        carta.add("ok");
+        
         ClientHandler player = players.get(turno);
         player.elimCarta(num);
-        carta.add(Integer.toString(num));
-        Message message= new Message("F", -1,carta);
-        player.sendMessage(message);
+        
+        juegoCartas.regresaCartaUsuario(num);
+        reenvioCartasU(turno);
     }
 
          //avisa si la carta es correcta
     public int chequeoCarta(int carta) throws IOException{
-        if(diccionario[carta].getColor()==diccionario[cartaMesa].getColor()
+        if(diccionario[carta].getColor().equals(diccionario[cartaMesa].getColor())
                 || diccionario[carta].getSimbolo()==diccionario[cartaMesa].getSimbolo()){
         cartaMesa=carta;
         //mandar mensaje de que elimine carta en usuario
@@ -256,7 +259,6 @@ public class GameRoom{
            sendMessageToRoomMembers(msg);
            return 2;
         }
-        juegoCartas.regresaCartaUsuario(carta);
         if ( diccionario[cartaMesa].getTipo()==0 ){// si la crta es especial 
             return efectosUsuario();
         }   
