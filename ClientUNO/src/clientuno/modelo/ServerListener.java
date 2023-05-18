@@ -107,25 +107,28 @@ public class ServerListener implements Runnable{
                             //new Thread(new UpdateUI(partida, 3)).start(); 
                         }
                         break;
-                    case "H":
-                        //manda nombres de usuario
-                        if(msg.parameters.get(0).equals("ok")){
+                    case "H"://                                                 Lista de usuarios 
+                        //
+                        if(msg.parameters.get(0).equals("ok")){                            
                             partida.setUsernames(msg.parameters);
+                            
                         }
                         break;
                         
                     case "I"://notificacion del servidor para iniciar el juego(alguien en tu sala pulso el boton iniciar juego)
-                        //Saltar de sala de espera a juego
+                        //Saltar de sala de espera a juego checar donde se envia
                         if(msg.parameters.get(0).equals("ok")){
                             new Thread(new UpdateUI(partida, 8)).start();   //Actualizar Interfaz                               
                         }                        
                         break;
                         
-                    case "J":
+                    case "J":                                                   //carta mesa/turno actual/bandera
                         //actualiza carta de la mesa y turno 
+                        //crear hilos para cargar esto
                         if(msg.parameters.get(0).equals("ok")){
                            partida.setCartaMesa(Integer.parseInt(msg.parameters.get(1)));
                            partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(1)),Boolean.parseBoolean(msg.parameters.get(2)));
+                           new Thread(new UpdateUI(partida, 9)).start();
                         }
                         break;
                     case "K": // funvion manda al servidor 

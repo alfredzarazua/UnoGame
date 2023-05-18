@@ -15,15 +15,19 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +41,9 @@ public class GameController {
     @FXML
     private ImageView Toma_carta;
     @FXML
-    private Pane Seleccion_color;
+    private Pane Seleccion_color;    
+    @FXML
+    private Pane namesListPane;  
     @FXML
     private ScrollPane Cartas_juego;
     @FXML
@@ -49,13 +55,16 @@ public class GameController {
     @FXML 
     private Button Salir_Sala; // no se como hacerlo     
     @FXML
-    private Label jugador1;
+    private Label jugador1;    
     @FXML
     private Label jugador2;
     @FXML
     private Label jugador3;
     @FXML
     private Label jugador4;
+    
+    @FXML
+    private Label roomName;
     
     @FXML
     private GridPane gridPane; 
@@ -67,6 +76,8 @@ public class GameController {
         nombre_ganador.setVisible(false);
         Toma_carta.setDisable(true);  
         gridPane.setDisable(false);
+        Tooltip tooltip = new Tooltip("Tomar una carta");
+        Tooltip.install(Toma_carta, tooltip);
         //insertarJugadores();
     }
     
@@ -83,30 +94,36 @@ public class GameController {
         params.add("ok");
         params.add(cardId);
         Message msg = new Message("K", 0, params);
-        
-        System.out.println("HOlA");
+                
         
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(msg);
     }
     
-    public void showUsernames( List<String> usernames){
-         jugador1.setText(usernames.get(0));
-         jugador2.setText(usernames.get(1));
-         
-         if(usernames.size()>2){
-             System.out.println("tamaño user"+ usernames.size());
-             jugador3.setText(usernames.get(2));
-             if(usernames.size()==4){
-             jugador4.setText(usernames.get(3));     
+    public void showUsernames( List<String> usernames){   
+        
+        StageData data = (StageData) stage.getUserData();
+        Label nameLabel;
+        double x = 15, y = 35;
+        for (String username : usernames) {
+            if(username.equals(data.username)){
+                nameLabel = new Label(username + " (You)");                                
             }else{
-                 jugador4.setText(" ");
-             }
-         }else{
-             jugador3.setText(" ");
-             jugador4.setText(" ");
-         }
+                nameLabel = new Label(username);
+            }
+            nameLabel.setLayoutX(x);
+            nameLabel.setLayoutY(y);
+            nameLabel.setFont(new Font(12));
+            nameLabel.setTextFill(Color.BLACK);
+            y += 22;
+            namesListPane.getChildren().add(nameLabel);
+        }
     }
+    
+    //Revisar si funciona el turno
+    //Se requiere actualizar: la carta actual o en juego
+    //                        la carta de comida?
+    //                        la etiqueta de turno
     
      public void habilitablockCartas(){
          gridPane.setDisable(false);
@@ -122,9 +139,14 @@ public class GameController {
     } 
     
     public void renderCartaActual(int cartaMesa){
-         Image image1 = new Image("..\\Cartas\\"+cartaMesa+".png");
+        String path = "../cartas/"+cartaMesa+".png";
+        Image image1 = new Image(getClass().getResource(path).toExternalForm());        
         Carta_Juego.setImage(image1);
     } 
+    
+    public void setRoomName(String name){
+        roomName.setText(name);
+    }
     
     
     public void renderUNOCards(List<Integer> cards){
@@ -138,8 +160,7 @@ public class GameController {
         //Agregar 7 cartas por renglon
         int col = 0, row = 0;        
         for (int card : cards) {
-            String path = imagePath + card + ".png";                        
-            System.out.println(path);
+            String path = imagePath + card + ".png";                                    
             ImageView imageView1 = new ImageView(getClass().getResource(path).toExternalForm()); 
             imageView1.setOnMouseClicked(event -> {
                 try {
@@ -152,6 +173,9 @@ public class GameController {
             imageView1.setId(Integer.toString(card));
             imageView1.setFitWidth(74); 
             imageView1.setFitHeight(110);
+            imageView1.setCursor(Cursor.HAND);
+            Tooltip tooltip = new Tooltip("Poner Carta");
+            Tooltip.install(imageView1, tooltip);
                        
             gridPane.add(imageView1, col, row);
                         
@@ -201,6 +225,8 @@ public class GameController {
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(message);
     }
+    
+    
      
      
      

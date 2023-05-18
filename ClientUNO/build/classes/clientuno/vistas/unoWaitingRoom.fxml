@@ -19,23 +19,23 @@
                   <Image url="@../Imagenes/FondoUno.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="207.0" layoutY="282.0" prefHeight="35.0" prefWidth="396.0" text="Waiting for others players to join..." textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="mainMessage" alignment="CENTER" layoutX="107.0" layoutY="282.0" prefHeight="35.0" prefWidth="570.0" text="Wait for others players to join this room..." textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="23.0" />
                </font>
             </Label>
             <ProgressIndicator fx:id="spinner" blendMode="ADD" cache="true" cacheHint="QUALITY" depthTest="ENABLE" layoutX="391.0" layoutY="327.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
-            <Label layoutX="348.0" layoutY="450.0" text="Connected:" textFill="WHITE">
+            <Label layoutX="345.0" layoutY="388.0" text="Connected:" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="labelActiveUsers" layoutX="442.0" layoutY="450.0" text="0/4" textFill="WHITE">
+            <Label fx:id="labelActiveUsers" layoutX="439.0" layoutY="388.0" text="0/4" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="botonIniciarPartida" layoutX="332.0" layoutY="482.0" mnemonicParsing="false" onAction="#solicitarInicioPartida" prefHeight="34.0" prefWidth="146.0" style="-fx-background-color: #54a954;" text="Iniciar Partida" textAlignment="CENTER">
+            <Button fx:id="botonIniciarPartida" layoutX="332.0" layoutY="482.0" mnemonicParsing="false" onAction="#solicitarInicioPartida" prefHeight="34.0" prefWidth="146.0" style="-fx-background-color: #54a954;" text="Play" textAlignment="CENTER">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -43,6 +43,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Label fx:id="roomData" alignment="CENTER" layoutX="247.0" layoutY="231.0" prefHeight="22.0" prefWidth="289.0" text="Room Name - ID" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

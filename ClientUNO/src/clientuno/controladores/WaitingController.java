@@ -29,7 +29,13 @@ public class WaitingController {
     @FXML
     private Button botonIniciarPartida;
     
+    @FXML
+    private Label mainMessage;
     
+    @FXML
+    private Label roomData;
+    
+    //checar si StageData devuelve el username, sino agregarlo en home controller
         
     //Actualiza el contador de usuarios activos en la sala
     public void setActiveUsersLabel(String count){
@@ -38,6 +44,14 @@ public class WaitingController {
         if( Integer.parseInt(count)>1){
             botonIniciarPartida.setDisable(false);  
         }
+    }
+    
+    public void setMainMessage(String userName){
+        mainMessage.setText("Hey "+userName+", Wait for others players to join this room...");
+    }
+    
+    public void setRoomDataMessage(String id, String name){
+        roomData.setText(name + " - " + id);
     }
     
     public void loadGameView() throws IOException{ //cambia pantalla
@@ -57,6 +71,7 @@ public class WaitingController {
         controller.renderUNOCards(data.partida.cartas);
         controller.inicializarPartida();
         controller.showUsernames(data.partida.getUsernames());
+        controller.setRoomName(roomData.getText());
         stage.show(); 
         
     }

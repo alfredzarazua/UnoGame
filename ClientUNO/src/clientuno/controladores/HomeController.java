@@ -54,8 +54,7 @@ public class HomeController {
         stage.show();          
     }
     
-    //Muestra la ventana de espera una vez que se aprobó unirse a una sala 
-    //aqui se pierde la conexion?
+    //Muestra la ventana de espera una vez que se aprobó unirse a una sala     
     public void loadWaitingView() throws IOException{
         StageData data = (StageData) stage.getUserData();   
         
@@ -66,19 +65,30 @@ public class HomeController {
         }else{
             System.out.println("Conexión correcta");
         }
+        data.setUsername(username.getText());
         stage.setUserData(data);
         stage.close(); 
+        
+        /*
+        Nota: data.params se usa para actualizar el num de usuarios activos en la sala
+        Usar esta lista para otra cosa puede hacer que se mezclen los datos porque funciona
+        de manera asíncrona, investigar otra forma en caso de ser necesario
+        */
         
         scene = new Scene(root); 
         stage.setScene(scene);
         stage.setTitle("Uno Game");        
         
+        //Aqui pasar los datos de la sala y del usuario
+        //
         
         
         WaitingController controller = loader.getController();
         controller.stage = stage; //correccion de error de conexion al cambiar de ventana
         data.partida.setController(controller);
-        controller.botonDeshabilitaInicializarPartida();        
+        controller.botonDeshabilitaInicializarPartida();
+        controller.setMainMessage(username.getText());
+        controller.setRoomDataMessage(idLabel1.getText(), roomLabel1.getText());
         
         stage.show(); 
     }

@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable{
     ObjectOutputStream out;
     ClientManager manager; //solo es para acceso a metodos de la clase
     List<Integer> cartas = new ArrayList<>(); //cartas de cada u 
-    private String userName= "si jala"; 
+    private String userName; 
     
     
     //agrega carta al u
@@ -50,6 +50,10 @@ public class ClientHandler implements Runnable{
     
     public int getSizeCartas(){
         return cartas.size();
+    }
+    
+    public void setUserName(String name){
+        userName = name;
     }
     
     public String getUsername(){
@@ -109,7 +113,7 @@ public class ClientHandler implements Runnable{
         while((msg=(Message)inn.readObject()) != null && !Thread.currentThread().isInterrupted()){            
             if(msg != null){
                 switch(msg.eventID){
-                    case "A": 
+                    case "A": //Registro de usuario
                         MySQL opcion = new MySQL();                     
                         try {                                                    
                             String res = opcion.InsertarDatosRegistro(msg.parameters);                            
@@ -118,6 +122,9 @@ public class ClientHandler implements Runnable{
                             response.addAll(manager.getAllRoomsToString());
                             Message resp = new Message("A", -1, response);
                             sendMessage(resp);
+                            if(res.equals("ok")){//En el registro se hace autologin, si se completó el registro, se queda el idUser
+                                setUserName(msg.parameters.get(0));
+                            }
                             
                         } catch (SQLException ex) {
                             List<String> response = new ArrayList<>();
@@ -128,7 +135,7 @@ public class ClientHandler implements Runnable{
                         }                    
                         break;
 
-                    case "B":
+                    case "B": //Login usuario
                         MySQL opcion2 = new MySQL();                     
                         try {
                             System.out.println("\tVerifying user...");                            
@@ -139,6 +146,9 @@ public class ClientHandler implements Runnable{
                             //Añadir sala como respuesta y num de jugadores
                             Message resp = new Message("B", -1, response);
                             sendMessage(resp);
+                            if(res.equals("ok")){
+                                setUserName(msg.parameters.get(0));
+                            }
                             
                         } catch (SQLException ex) {
                             List<String> response = new ArrayList<>();

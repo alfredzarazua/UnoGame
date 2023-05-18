@@ -25,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
 
 public class Partida extends ClientUNO{        
     ServerConnection sc;  
@@ -198,16 +197,13 @@ public class Partida extends ClientUNO{
     
     //Revisar es necesario separar? recibe la lista de cartas, se tendría que pasar en UPDATEUI?
     public void setJuegoCartas(List<String> car){
-       for(int i=1; i<car.size(); i++){
-           cartas.add(Integer.valueOf(car.get(i)));
-       }
-       System.out.println("Current is:"+loader.getController().getClass());
-        System.out.println("Should be GameController");
-       GameController controller = loader.getController();
-       controller.renderUNOCards(cartas);
-        for (int carta : cartas) {
-            System.err.println("Carta: " + carta);
+        
+        for(int i=1; i<car.size(); i++){
+            cartas.add(Integer.valueOf(car.get(i)));
         }
+
+        GameController controller = loader.getController();
+        controller.renderUNOCards(cartas);        
     }
     
     public void igualarJuegoCartas(List<String> car){
@@ -220,11 +216,11 @@ public class Partida extends ClientUNO{
         controller.renderUNOCards(cartas);*/
     }
     
-    public void setUsernames(List<String> u){
+    public void setUsernames(List<String> u){        
         usernames= new ArrayList<>();
-       for(int i=1; i<u.size(); i++){
-           usernames.add(u.get(i));
-       }
+        for(int i=1; i<u.size(); i++){
+            usernames.add(u.get(i));
+        }
     }
     
     public List<String> getUsernames(){
@@ -232,10 +228,7 @@ public class Partida extends ClientUNO{
     }
     
     public void setCartaMesa(int cartaMesa){
-        this.cartaMesa=cartaMesa;
-        /*
-        GameController controller = loader.getController();
-        controller.renderCartaActual(cartaMesa);*/
+        this.cartaMesa=cartaMesa;        
     }
     
     public int getCartaMesa(){
@@ -244,12 +237,7 @@ public class Partida extends ClientUNO{
     
     public void nuevoTurnoActual(int turnoActual, boolean castigo) throws IOException{
         this.turnoActual=turnoActual;
-        this.castigo= castigo;
-        
-        /*
-        GameController controller = loader.getController();
-        controller.renderTurnoActual(usernames.get(turno));*/
-        
+        this.castigo= castigo;       
         actualizaInformacion();
     }
     
@@ -275,6 +263,15 @@ public class Partida extends ClientUNO{
     
     public void setJuegoCarta(int carta){
         cartas.add(carta);
+    }
+    
+    //caso j
+    public void setTurnData(){
+        System.out.println("Turno: "+turnoActual);
+        
+        GameController controller = loader.getController();                        
+        controller.renderCartaActual(cartaMesa);                        
+        controller.renderTurnoActual(usernames.get(turnoActual));        
     }
     
     

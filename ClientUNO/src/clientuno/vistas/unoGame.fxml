@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -59,10 +60,13 @@
          <children>
             <Pane layoutY="-1.0" prefHeight="128.0" prefWidth="530.0" style="-fx-background-color: #ed1c24;">
                <children>
-                  <ImageView fitHeight="109.0" fitWidth="144.0" layoutX="385.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="128.0" fitWidth="218.0" layoutX="354.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Imagenes/Juego%20uno.png" />
+                        <Image url="@../Imagenes/Uno.png" />
                      </image>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
                   </ImageView>
                   <Label layoutX="71.0" layoutY="44.0" text="Juego de la Sala">
                      <font>
@@ -83,10 +87,13 @@
             </Label>
             <Button fx:id="Toma_Carta" contentDisplay="GRAPHIC_ONLY" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" prefHeight="331.0" prefWidth="254.0" style="-fx-background-color: #C1b7aa;" textAlignment="CENTER">
                <graphic>
-                  <ImageView fx:id="Toma_carta" fitHeight="337.0" fitWidth="249.0">
+                  <ImageView fx:id="Toma_carta" fitHeight="337.0" fitWidth="230.0" preserveRatio="true">
                      <image>
-                        <Image url="@Imagenes/Reverso.png" />
+                        <Image url="@../Imagenes/uno_back.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
                   </ImageView>
                </graphic>
                <cursor>
@@ -115,7 +122,7 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="220.0" layoutY="36.0" style="-fx-background-color: #C1b7aa;" text="Sala N° 1">
+      <Label fx:id="roomName" layoutX="220.0" layoutY="36.0" style="-fx-background-color: #C1b7aa;" text="Sala N° 1">
          <font>
             <Font name="Calibri" size="36.0" />
          </font>
@@ -128,17 +135,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane layoutX="14.0" layoutY="112.0" prefHeight="144.0" prefWidth="209.0" style="-fx-background-color: #C1b7aa;">
+      <Pane fx:id="namesListPane" layoutX="14.0" layoutY="112.0" prefHeight="144.0" prefWidth="209.0" style="-fx-background-color: #C1b7aa;">
          <children>
             <Label layoutX="30.0" layoutY="3.0" text="Jugadores en la Sala">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="jugador1" layoutX="14.0" layoutY="34.0" text="Jugador 1" />
-            <Label fx:id="jugador2" layoutX="14.0" layoutY="57.0" text="Jugador 2" />
-            <Label fx:id="jugador3" layoutX="14.0" layoutY="80.0" text="Jugador 3" />
-            <Label fx:id="jugador4" layoutX="14.0" layoutY="104.0" text="Jugador 4" />
          </children>
       </Pane>
       <ScrollPane fx:id="Cartas_juego" layoutX="14.0" layoutY="263.0" prefHeight="410.0" prefWidth="613.0" style="-fx-background-color: #C1b7aa;" vbarPolicy="ALWAYS" />

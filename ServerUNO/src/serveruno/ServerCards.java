@@ -78,14 +78,11 @@ public class ServerCards{
         //int random= aleatorio.nextInt(comida.size());
         
         int random = (int)(Math.random()*comida.size()); // 0 
-        
-        System.err.println("random: "+random);
-        num= comida.get(random).getPosicion();
-        System.err.println("Carta: "+num);
+                
+        num= comida.get(random).getPosicion();        
         userCards[num]+=1;
         
-        if( comida.get(random).getCantidad()-1==0){
-            //remueva index
+        if( comida.get(random).getCantidad()-1==0){            
             comida.remove(random);
         }else{
             comida.get(random).resCant(1);
@@ -128,9 +125,9 @@ public class ServerCards{
       c= new CartaCom(4, 53);
       comida.add(c);
 
-      for( int i=0; i<comida.size(); i++){
+      /*for( int i=0; i<comida.size(); i++){
            System.out.println(comida.get(i).getPosicion());
-      }
+      }*/
     }
     
     

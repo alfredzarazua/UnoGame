@@ -101,9 +101,9 @@ public class GameRoom{
            darJuegoCartas(i);   
        }
        cartaMesa= juegoCartas.darComida(); 
-       Message msg = new Message("H", -1,message);
+       Message msg = new Message("H", -1,message);                              //Envia Lista de jugadores
        sendMessageToRoomMembers(msg);
-        inicializarInfo();
+       inicializarInfo();                                                       //Envia carta mesa/turno actual/bandera
     }
     
     //este se supone que sirve para actualizar a todos en el servidor
