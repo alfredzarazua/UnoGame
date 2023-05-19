@@ -23,6 +23,7 @@ public class Baraja {
             for(int j=0; j<10;j++){
                 juegoCartas[cont]= new Carta(colores[i],1, j);// clave vacia 40
                 cont++;
+                //10
             }
             
             juegoCartas[cont]= new Carta(colores[i],0 ,10 ); //cartaReversa;
@@ -31,7 +32,7 @@ public class Baraja {
             cont++;
             juegoCartas[cont]= new Carta(colores[i],0 ,12 ); //cartaBloqueo;
                // clave vacia 52 
-            cont++;
+            cont++;//13
         }
         juegoCartas[cont]= new Carta("Negro",0 ,13); //52
         cont++;
