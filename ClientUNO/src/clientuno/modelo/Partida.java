@@ -273,8 +273,6 @@ public class Partida extends ClientUNO{
 
         
     }
-    
-    
     public void showText(){
         GameController controller = loader.getController();                                                       
         controller.visibleNombreGanador();  

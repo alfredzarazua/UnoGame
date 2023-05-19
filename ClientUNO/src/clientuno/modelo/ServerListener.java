@@ -138,11 +138,9 @@ public class ServerListener implements Runnable{
                         //int c=12;
                         //int var;
                         if(msg.parameters.get(0).equals("ok")){
-                            new Thread(new UpdateUI(partida, 12)).start();
-                            new Thread(new UpdateUI(partida, 14)).start();
-                            if(msg.parameters.get(0).equals("0")){
+                            if(msg.parameters.get(1).equals("0")){
                                  new Thread(new UpdateUI(partida, 14)).start();
-                            }else if(msg.parameters.get(0).equals("-1")){
+                            }else if(msg.parameters.get(1).equals("-1")){
                                new Thread(new UpdateUI(partida, 12)).start();
                             }
                             /* se deben de mostrar naamas
