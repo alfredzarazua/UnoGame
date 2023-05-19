@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 public class ConectarMySQL {
     public static final String URL = "jdbc:mysql://localhost:3306/juego_uno";
     public static final String USER = "root";
-    public static final String PSWD = "1427";
+    public static final String PSWD = "Mohacku1rl!";
     private Connection connection = null;
  
     public Connection getConnection(){        

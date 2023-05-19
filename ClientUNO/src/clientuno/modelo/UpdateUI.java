@@ -67,6 +67,10 @@ public class UpdateUI extends Task<Void>{
                 case 9 -> partida.setTurnData();                 //Actualizar turno actual
                 case 10 -> partida.updateCards();                //Actualizar cartas del usuario
                 case 11 -> partida.updateCartaMesa();            //Actualizar Carta de mesa
+                case 12 -> partida.showColorButtoms();           // Muestra botones
+                case 13 -> partida.setWinner();              //Actualiza nombre del ganador 
+                case 14 -> partida.showText();                    //mostrar si no es compatible
+                //case 15 -> partida.enableShift();             //habilitar botones si es tu turno
             }
         });                               
         return null;                        

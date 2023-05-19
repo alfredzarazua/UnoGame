@@ -226,15 +226,14 @@ public class ClientHandler implements Runnable{
                                GameRoom currentRoom2 = manager.getMyCurrentRoom(idRoomJoined);
                             if(currentRoom2 != null){
                               int ans=  currentRoom2.chequeoCarta(Integer.parseInt(msg.parameters.get(1)));
-                             
-                              if(ans!=1){// si no es correcta, o accedemos colores
+                              if(/*ans!=1 && ans!=2*/ ans==-1){// si no es correcta, o accedemos colores
                                    response = new ArrayList<>();
                                    response.add("ok");
                                    response.add(Integer.toString(ans));
                                    resp = new Message("L", -1, response);
                                    sendMessage(resp);
-                              }else if(ans == 1){
                                    
+                              }else if(ans == 1){
                                    currentRoom2.aumentoTurno();
                                    currentRoom2.nuevoTurno();
                                }

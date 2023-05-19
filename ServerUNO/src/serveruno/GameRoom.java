@@ -246,7 +246,8 @@ public class GameRoom{
          //avisa si la carta es correcta
     public int chequeoCarta(int carta) throws IOException{
         if(diccionario[carta].getColor().equals(diccionario[cartaMesa].getColor())
-                || diccionario[carta].getSimbolo()==diccionario[cartaMesa].getSimbolo()){
+                || diccionario[carta].getSimbolo()==diccionario[cartaMesa].getSimbolo()
+                || diccionario[carta].getColor().equals("Negro")){
         cartaMesa=carta;
         //mandar mensaje de que elimine carta en usuario
         eliminarCartaCliente(carta);
@@ -259,7 +260,7 @@ public class GameRoom{
            sendMessageToRoomMembers(msg);
            return 2;
         }
-        if ( diccionario[cartaMesa].getTipo()==0 ){// si la crta es especial 
+        if ( diccionario[cartaMesa].esCartaEspecial()){// si la crta es especial 
             return efectosUsuario();
         }   
         /*
@@ -299,17 +300,17 @@ public class GameRoom{
             
         if( diccionario[cartaMesa].getSimbolo()==13){ //caso que sea boton cambio color 
             switch(opBoton){
-                case "Amarillo" -> cartaMesa=54;
-                case "Azul" -> cartaMesa=55;
-                case "Rojo" -> cartaMesa=56;
-                case "Verde" -> cartaMesa=57;  
+                case "Amarillo" -> cartaMesa=56;
+                case "Azul" -> cartaMesa=57;
+                case "Rojo" -> cartaMesa=54;
+                case "Verde" -> cartaMesa=55;  
             }   
         }else{ //caso que sea boton +4
             switch(opBoton){
-                case "Amarillo" -> cartaMesa=58;
-                case "Azul" -> cartaMesa=59;
-                case "Rojo" -> cartaMesa=60;
-                case "Verde" -> cartaMesa=61;  
+                case "Amarillo" -> cartaMesa=60;
+                case "Azul" -> cartaMesa=61;
+                case "Rojo" -> cartaMesa=58;
+                case "Verde" -> cartaMesa=59;  
             }   
         }
         aumentoTurno();

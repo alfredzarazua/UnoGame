@@ -26,21 +26,26 @@ public class Baraja {
             }
             
             juegoCartas[cont]= new Carta(colores[i],0 ,10 ); //cartaReversa;
-            juegoCartas[cont++]= new Carta(colores[i],0 ,11); //cartaSum2
-            juegoCartas[cont++]= new Carta(colores[i],0 ,12 ); //cartaBloqueo;
+            cont++;
+            juegoCartas[cont]= new Carta(colores[i],0 ,11); //cartaSum2
+            cont++;
+            juegoCartas[cont]= new Carta(colores[i],0 ,12 ); //cartaBloqueo;
                // clave vacia 52 
             cont++;
         }
         juegoCartas[cont]= new Carta("Negro",0 ,13); //52
-         juegoCartas[cont++]= new Carta("Negro",0 ,14);//53
-        
+        cont++;
+         juegoCartas[cont]= new Carta("Negro",0 ,14);//53
+        cont++;
         
         for(int i=0; i<4; i++){
-           juegoCartas[cont++]= new Carta(colores[i],0 ,13); // 58 vacia;
+           juegoCartas[cont]= new Carta(colores[i],0 ,13); // 58 vacia;
+           cont++;
         }
         
         for(int i=0; i<4; i++){
-           juegoCartas[cont++]= new Carta(colores[i],0 ,14); // 62 vacia;
+           juegoCartas[cont]= new Carta(colores[i],0 ,14); // 62 vacia;
+           cont++;
         } 
         //vacia 62
     }

@@ -229,10 +229,6 @@ public class Partida extends ClientUNO{
         this.cartaMesa=cartaMesa;        
     }
     
-    public int getCartaMesa(){
-        return cartaMesa;
-    }
-    
     public void nuevoTurnoActual(int turnoActual, boolean castigo) throws IOException{
         this.turnoActual=turnoActual;
         this.castigo= castigo;       
@@ -249,25 +245,15 @@ public class Partida extends ClientUNO{
                 StageData data = (StageData) stage.getUserData();
                 data.connection.sendMessage(message);
             //manda mensaje de que le toca castigo
-   
-        }else{
-               
-           } 
-        }  
-    }
-    public int getTurnoActual(){
-        return turnoActual;
+        }
+        }
+        
     }
     
     public void setJuegoCarta(int carta){
         cartas.add(carta);
     }
     
-    
-    ////////////////////////////////////////////////////////////////////////////
-    //UI UPDATES
-    
-    //actualizar carta de la mesa
     public void updateCartaMesa(){
                 
         GameController controller = loader.getController();                        
@@ -278,8 +264,34 @@ public class Partida extends ClientUNO{
     public void setTurnData(){
         System.out.println("Turno: "+turnoActual);
         
+        GameController controller = loader.getController();
+        controller.inicializarPartida();
+        controller.renderTurnoActual(usernames.get(turnoActual)); 
+        if( turno== turnoActual){
+            controller.habilitaTurno(); 
+        }
+
+        
+    }
+    
+    
+    public void showText(){
         GameController controller = loader.getController();                                                       
-        controller.renderTurnoActual(usernames.get(turnoActual));        
+        controller.visibleNombreGanador();  
+        
+    }
+    
+     public void setWinner(){
+        
+        GameController controller = loader.getController();  
+        controller.inicializarPartida();
+        controller.renderNombreGanador("HA GANADO " +usernames.get(turnoActual)+ " <3 <3");  
+     }
+     
+    public void showColorButtoms(){
+        GameController controller = loader.getController(); 
+        controller.inicializarPartida();
+        controller.habilitaColorPane();  
     }
     
     //Actualizar todas las cartas del usuario

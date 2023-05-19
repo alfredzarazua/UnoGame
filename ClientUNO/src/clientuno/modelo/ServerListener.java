@@ -129,18 +129,27 @@ public class ServerListener implements Runnable{
                            partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(2)),Boolean.parseBoolean(msg.parameters.get(3)));
                            new Thread(new UpdateUI(partida, 9)).start();//turno actual
                            new Thread(new UpdateUI(partida, 11)).start();//carta de la mesa
+                           
                         }
                         break;
                     case "K": // funvion manda al servidor 
                         break; 
                     case "L": // manda respuesta de la carta 
+                        //int c=12;
+                        //int var;
                         if(msg.parameters.get(0).equals("ok")){
+                            new Thread(new UpdateUI(partida, 12)).start();
+                            new Thread(new UpdateUI(partida, 14)).start();
+                            if(msg.parameters.get(0).equals("0")){
+                                 new Thread(new UpdateUI(partida, 14)).start();
+                            }else if(msg.parameters.get(0).equals("-1")){
+                               new Thread(new UpdateUI(partida, 12)).start();
+                            }
                             /* se deben de mostrar naamas
                                 0= no es carta correcta
                                 1= es carta correcta// este caso no va a entrar 
                                 -1 = activa boton
-                                */  
-                            /////////////////////////////////////////////////////////////Me falta esto 
+                                */ 
                         }
                         break; 
                     case "M":
@@ -153,7 +162,7 @@ public class ServerListener implements Runnable{
                     case "N":
                         //nueva turno
                         if(msg.parameters.get(0).equals("ok")){
-                            partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(1)),Boolean.parseBoolean(msg.parameters.get(2)));
+                             partida.nuevoTurnoActual(Integer.parseInt(msg.parameters.get(1)),Boolean.parseBoolean(msg.parameters.get(2)));
                             new Thread(new UpdateUI(partida, 9)).start(); 
                         }
                         break;
@@ -170,6 +179,7 @@ public class ServerListener implements Runnable{
                         }
                         break;
                     case "T": //Termina juego
+                        new Thread(new UpdateUI(partida, 13)).start();
                         break;
                     
                 }

@@ -39,9 +39,9 @@ public class GameController {
     public Stage stage; 
     
     @FXML
-    private ImageView Toma_carta;
+    private Button Toma_carta;
     @FXML
-    private Pane Seleccion_color;    
+    private Pane Seleccion_color_pane;    
     @FXML
     private Pane namesListPane;  
     @FXML
@@ -55,15 +55,6 @@ public class GameController {
     @FXML 
     private Button Salir_Sala; // no se como hacerlo     
     @FXML
-    private Label jugador1;    
-    @FXML
-    private Label jugador2;
-    @FXML
-    private Label jugador3;
-    @FXML
-    private Label jugador4;
-    
-    @FXML
     private Label roomName;
     
     @FXML
@@ -71,17 +62,41 @@ public class GameController {
    
     
     public void inicializarPartida(){                         
-        Seleccion_color.setDisable(true);
-        Seleccion_color.setVisible(false);
+        deshabilitaColorPane();
         nombre_ganador.setVisible(false);
-        //Toma_carta.setDisable(true);  
-        //gridPane.setDisable(false);
+       
         Tooltip tooltip = new Tooltip("Tomar una carta");
         Tooltip.install(Toma_carta, tooltip);
+        
+        Toma_carta.setDisable(true);  
+        gridPane.setDisable(true); 
         //insertarJugadores();
+    }
+   
+    public void visibleNombreGanador(){
+        nombre_ganador.setVisible(true);
+    }
+    
+    public void habilitaTurno(){
+        Toma_carta.setDisable(false);  
+        gridPane.setDisable(false); 
     }
     
     
+    public void deshabilitaColorPane(){
+        Seleccion_color_pane.setVisible(false);
+        Seleccion_color_pane.setDisable(true);
+    }
+    
+    public void habilitaColorPane(){
+        Seleccion_color_pane.setVisible(true);
+        Seleccion_color_pane.setDisable(false);
+     }
+    
+    public void renderNombreGanador(String text){
+        nombre_ganador.setText(text);
+        nombre_ganador.setVisible(true);
+    }
     
     /*Documentacion
     https://stackoverflow.com/questions/16990482/java-lang-illegalargumentexception-invalid-url-or-resource-not-found
@@ -124,18 +139,9 @@ public class GameController {
     //Se requiere actualizar: la carta actual o en juego
     //                        la carta de comida?
     //                        la etiqueta de turno
-    
-     public void habilitablockCartas(){
-         gridPane.setDisable(false);
-     }
-    
-     public void habilitaSeleccionColor(){
-         Seleccion_color.setDisable(false);
-        Seleccion_color.setVisible(true);
-     }
-    
+
     public void renderTurnoActual(String turnoActual){
-        Nombre_turno_actual.setText(turnoActual); 
+        Nombre_turno_actual.setText(turnoActual);
     } 
     
     public void renderCartaActual(int cartaMesa){
@@ -197,6 +203,8 @@ public class GameController {
         Message message= new Message("Q", -1,msg);
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(message);
+        
+        deshabilitaColorPane();
     }
     public void presionaBotonVerde(ActionEvent event) throws Exception{
         List<String> msg = new ArrayList<>();
@@ -206,6 +214,8 @@ public class GameController {
         Message message= new Message("Q", -1,msg);
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(message);
+        
+        deshabilitaColorPane();
     }
     public void presionaBotonAmarillo(ActionEvent event) throws Exception{
         List<String> msg = new ArrayList<>();
@@ -215,6 +225,8 @@ public class GameController {
         Message message= new Message("Q", -1,msg);
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(message);
+        
+        deshabilitaColorPane();
     }
     public void presionaBotonAzul(ActionEvent event) throws Exception{
         List<String> msg = new ArrayList<>();
@@ -224,6 +236,8 @@ public class GameController {
         Message message= new Message("Q", -1,msg);
         StageData data = (StageData) stage.getUserData();
         data.connection.sendMessage(message);
+        
+        deshabilitaColorPane();
     }
     
     public void presionaBotonComida(ActionEvent event) throws Exception{
