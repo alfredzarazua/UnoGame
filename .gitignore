@@ -3,3 +3,5 @@
 /ClientUNO/build/
 /ClientUNO/dist/
 /ServerUNO/build/
+/ServerUNO/build/built-jar.properties
+/ServerUNO/nbproject/private/private.xml
