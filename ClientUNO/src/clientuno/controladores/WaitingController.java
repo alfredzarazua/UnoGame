@@ -35,6 +35,8 @@ public class WaitingController {
     @FXML
     private Label roomData;
     
+
+    
     //checar si StageData devuelve el username, sino agregarlo en home controller
         
     //Actualiza el contador de usuarios activos en la sala
@@ -50,8 +52,10 @@ public class WaitingController {
         mainMessage.setText("Hey "+userName+", Wait for others players to join this room...");
     }
     
-    public void setRoomDataMessage(String id, String name){
-        roomData.setText(name + " - " + id);
+    public void setRoomDataMessage(String idRoom, String nameRoom){
+       /* this.idRoom= idRoom;
+        this.nameRoom= nameRoom;*/
+        roomData.setText(nameRoom + " - " + idRoom);
     }
     
     public void loadGameView() throws IOException{ //cambia pantalla

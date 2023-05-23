@@ -13,9 +13,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1169.0" style="-fx-background-color: #B1a79b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1169.0" style="-fx-background-color: #C1b7aa;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientuno.controladores.GameController">
    <children>
-      <Pane fx:id="Seleccion_color_pane" layoutX="313.0" layoutY="112.0" prefHeight="144.0" prefWidth="314.0" style="-fx-background-color: #C1b7aa;">
+      <Pane fx:id="Seleccion_color_pane" layoutX="313.0" layoutY="112.0" prefHeight="144.0" prefWidth="314.0" style="-fx-background-color: #F4F4F4;">
          <children>
             <Label layoutX="89.0" layoutY="6.0" text="Seleccione el color">
                <font>
@@ -24,7 +24,7 @@
             </Label>
             <Button fx:id="Color_Amarillo" layoutX="6.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonAmarillo" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #ffa800;" text="Amarillo" textAlignment="CENTER">
                <font>
-                  <Font name="Calibri" size="14.0" />
+                  <Font name="Calibri Bold Italic" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -32,7 +32,7 @@
             </Button>
             <Button fx:id="Color_Azul" layoutX="82.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonAzul" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #5354fe;" text="Azul" textAlignment="CENTER">
                <font>
-                  <Font name="Calibri" size="14.0" />
+                  <Font name="Calibri Bold Italic" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -40,7 +40,7 @@
             </Button>
             <Button fx:id="Color_Rojo" layoutX="158.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonRojo" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #fe5454;" text="Rojo" textAlignment="CENTER">
                <font>
-                  <Font name="Calibri" size="14.0" />
+                  <Font name="Calibri Bold Italic" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -48,7 +48,7 @@
             </Button>
             <Button fx:id="Color_Verde" layoutX="235.0" layoutY="41.0" mnemonicParsing="false" onAction="#presionaBotonVerde" prefHeight="93.0" prefWidth="71.0" style="-fx-background-color: #54a954;" text="Verde">
                <font>
-                  <Font name="Calibri" size="14.0" />
+                  <Font name="Calibri Bold Italic" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -56,7 +56,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="632.0" layoutY="26.0" prefHeight="648.0" prefWidth="530.0" style="-fx-background-color: #C1b7aa;">
+      <Pane layoutX="632.0" layoutY="26.0" prefHeight="648.0" prefWidth="530.0" style="-fx-background-color: #0060b0;">
          <children>
             <Pane layoutY="-1.0" prefHeight="128.0" prefWidth="530.0" style="-fx-background-color: #ed1c24;">
                <children>
@@ -68,9 +68,9 @@
                         <ColorAdjust />
                      </effect>
                   </ImageView>
-                  <Label layoutX="71.0" layoutY="44.0" text="Juego de la Sala">
+                  <Label fx:id="roomName" layoutX="28.0" layoutY="42.0" style="-fx-background-color: #ed1c24;" text="Sala N° 1">
                      <font>
-                        <Font name="Calibri" size="36.0" />
+                        <Font name="Calibri Bold Italic" size="38.0" />
                      </font>
                   </Label>
                </children>
@@ -80,12 +80,12 @@
                   <Image url="@Imagenes/Cambio_de_Color.png" />
                </image>
             </ImageView>
-            <Label layoutX="54.0" layoutY="258.0" text="Carta en juego">
+            <Label layoutX="54.0" layoutY="258.0" text="Carta en juego" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="Toma_carta" contentDisplay="GRAPHIC_ONLY" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" onAction="#presionaBotonComida" prefHeight="331.0" prefWidth="254.0" style="-fx-background-color: #C1b7aa;" textAlignment="CENTER">
+            <Button fx:id="Toma_carta" contentDisplay="GRAPHIC_ONLY" layoutX="251.0" layoutY="294.0" mnemonicParsing="false" onAction="#presionaBotonComida" prefHeight="331.0" prefWidth="254.0" style="-fx-background-color: #0060b0;" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="337.0" fitWidth="230.0" preserveRatio="true">
                      <image>
@@ -100,42 +100,37 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="322.0" layoutY="258.0" text="Tomar Carta">
+            <Label layoutX="322.0" layoutY="258.0" text="Tomar Carta" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="54.0" layoutY="156.0" text="Es el turno de:">
+            <Label layoutX="191.0" layoutY="149.0" text="Es el turno de:" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="Nombre_turno_actual" layoutX="179.0" layoutY="156.0" text="*NOMBRE DEL JUGADOR*">
+            <Label fx:id="Nombre_turno_actual" alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="172.0" prefHeight="31.0" prefWidth="199.0" text="hola" textAlignment="CENTER" textFill="#fadf0e">
                <font>
-                  <Font name="Calibri Bold" size="20.0" />
+                  <Font name="Calibri Bold" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="nombre_ganador" layoutX="159.0" layoutY="207.0" text="Esa carta no es compatible">
+            <Label fx:id="Texto_aviso" layoutX="152.0" layoutY="224.0" text="Esa carta no es compatible" textFill="#f86e6e">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label fx:id="roomName" layoutX="220.0" layoutY="36.0" style="-fx-background-color: #C1b7aa;" text="Sala N° 1">
+      <Button fx:id="Salir_Sala" layoutX="21.0" layoutY="30.0" mnemonicParsing="false" onAction="#pressExit" prefHeight="34.0" prefWidth="71.0" style="-fx-background-color: #ed1c24;" text="Salir" textAlignment="CENTER">
          <font>
-            <Font name="Calibri" size="36.0" />
-         </font>
-      </Label>
-      <Button fx:id="Salir_Sala" layoutX="21.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #Ff0000;" text="&lt;- Salir" textAlignment="CENTER">
-         <font>
-            <Font name="Calibri" size="18.0" />
+            <Font name="Calibri Bold" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane fx:id="namesListPane" layoutX="14.0" layoutY="112.0" prefHeight="144.0" prefWidth="209.0" style="-fx-background-color: #C1b7aa;">
+      <Pane fx:id="namesListPane" layoutX="14.0" layoutY="112.0" prefHeight="144.0" prefWidth="209.0" style="-fx-background-color: #F4F4F4F4;">
          <children>
             <Label layoutX="30.0" layoutY="3.0" text="Jugadores en la Sala">
                <font>
@@ -144,7 +139,36 @@
             </Label>
          </children>
       </Pane>
-      <ScrollPane fx:id="Cartas_juego" layoutX="14.0" layoutY="263.0" prefHeight="410.0" prefWidth="613.0" style="-fx-background-color: #C1b7aa;" vbarPolicy="ALWAYS" />
+      <ScrollPane fx:id="Cartas_juego" layoutX="14.0" layoutY="264.0" prefHeight="410.0" prefWidth="613.0" style="-fx-background-color: ;" vbarPolicy="ALWAYS" />
+      <Pane fx:id="Win_pane" layoutX="194.0" layoutY="63.0" prefHeight="555.0" prefWidth="780.0" style="-fx-background-color: #000000;">
+         <children>
+            <ImageView fitHeight="296.0" fitWidth="815.0" layoutX="90.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Winner_Edit.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="311.0" layoutY="50.0" text="El ganador es: " textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="Winner_name" alignment="CENTER" contentDisplay="CENTER" layoutX="311.0" layoutY="81.0" prefHeight="39.0" prefWidth="156.0" text="hola" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold Italic" size="33.0" />
+               </font>
+            </Label>
+            <Button layoutX="161.0" layoutY="460.0" mnemonicParsing="false" onAction="#pressExit" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #Ff0000;" text="Salir">
+               <font>
+                  <Font name="Calibri Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="467.0" layoutY="460.0" mnemonicParsing="false" onAction="#reiniciarJuego" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #008f39;" text="Volver a jugar">
+               <font>
+                  <Font name="Calibri Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
    </children>
    <cursor>
       <Cursor fx:constant="DISAPPEAR" />

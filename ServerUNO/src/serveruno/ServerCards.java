@@ -73,7 +73,6 @@ public class ServerCards{
             Barajar();
         }
         
-        Random aleatorio = new Random(System.currentTimeMillis());
         // Producir nuevo int aleatorio entre 0 y cant elem del arreglo-1
         //int random= aleatorio.nextInt(comida.size());
         

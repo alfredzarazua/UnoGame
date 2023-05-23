@@ -14,10 +14,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
@@ -25,7 +29,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -36,7 +39,11 @@ import javafx.stage.Stage;
  */
 public class GameController {
     
+     
+    
     public Stage stage; 
+    public Scene scene; 
+    public Parent root; 
     
     @FXML
     private Button Toma_carta;
@@ -47,7 +54,7 @@ public class GameController {
     @FXML
     private ScrollPane Cartas_juego;
     @FXML
-    private Label nombre_ganador;
+    private Label Texto_aviso;
     @FXML
     private Label Nombre_turno_actual;
     @FXML
@@ -56,14 +63,16 @@ public class GameController {
     private Button Salir_Sala; // no se como hacerlo     
     @FXML
     private Label roomName;
-    
     @FXML
     private GridPane gridPane; 
-   
+    @FXML
+    private Pane Win_pane;
+   @FXML
+   private Label Winner_name;
     
     public void inicializarPartida(){                         
         deshabilitaColorPane();
-        nombre_ganador.setVisible(false);
+        Texto_aviso.setVisible(false);
        
         Tooltip tooltip = new Tooltip("Tomar una carta");
         Tooltip.install(Toma_carta, tooltip);
@@ -71,10 +80,29 @@ public class GameController {
         Toma_carta.setDisable(true);  
         gridPane.setDisable(true); 
         //insertarJugadores();
+        Win_pane.setVisible(false);
+        Win_pane.setDisable(true);
+        Salir_Sala.setVisible(true);
+    }
+    
+    public void setWinner(String name){
+        Win_pane.setVisible(true);
+        Win_pane.setDisable(false);
+        Winner_name.setText(name);
+        Salir_Sala.setVisible(false);
+    }
+    
+    public void reiniciarJuego(ActionEvent event) throws IOException{
+        List<String> msg = new ArrayList<>();
+        msg.add("ok");        
+        //manda numero 
+        Message message= new Message("W", -1,msg);
+        StageData data = (StageData) stage.getUserData();
+        data.connection.sendMessage(message);
     }
    
     public void visibleNombreGanador(){
-        nombre_ganador.setVisible(true);
+        Texto_aviso.setVisible(true);
     }
     
     public void habilitaTurno(){
@@ -92,11 +120,6 @@ public class GameController {
         Seleccion_color_pane.setVisible(true);
         Seleccion_color_pane.setDisable(false);
      }
-    
-    public void renderNombreGanador(String text){
-        nombre_ganador.setText(text);
-        nombre_ganador.setVisible(true);
-    }
     
     /*Documentacion
     https://stackoverflow.com/questions/16990482/java-lang-illegalargumentexception-invalid-url-or-resource-not-found
@@ -150,8 +173,9 @@ public class GameController {
         Carta_Juego.setImage(image1);
     } 
     
-    public void setRoomName(String name){
-        roomName.setText(name);
+    public void setRoomName(String idRoom){
+       
+        roomName.setText(idRoom);
     }
     
     
@@ -250,6 +274,51 @@ public class GameController {
     }
     
     
+    public void loadHome() throws IOException{
+        
+        StageData data = (StageData) stage.getUserData();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../vistas/unoHome.fxml"));
+        root = loader.load();              
+        scene = new Scene(root); 
+        stage.setScene(scene);                        
+        
+        stage.setTitle("Home");
+        HomeController controller = loader.getController();  
+        controller.setUsername(data.username);
+        //traer datos antes
+        controller.setRoomProperties(data.params.get(1), data.params.get(2), data.params.get(3));
+        controller.setInitState();
+        data.partida.setController(controller);//Actualizamos el controlador de partida
+        stage.show();
+     }
+    
+    public void pressExit(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Close UNO");
+        alert.setHeaderText("You´re about to exit");
+        alert.setContentText("Do you want to exit?");
+        
+        
+        if(alert.showAndWait().get()==ButtonType.OK){
+            Node node = (Node) event.getSource();   
+            stage = (Stage) node.getScene().getWindow();
+            StageData data = (StageData) stage.getUserData();
+
+            List<String> msg = new ArrayList<>();
+            msg.add("ok");
+            Message message= new Message("U", -1,msg);
+            //loadGameView(); //no se debe mandar llamar aqui, este metodo va en la respuesta que envie el servidor(la respuesta es a todos los miembros de la sala)        
+            data.connection.sendMessage(message);   
+            stage.setUserData(data);
+        }
+    }
+      
+    
+        
+    }
+    
+    
     
      
      
@@ -257,4 +326,3 @@ public class GameController {
      
      
     
-}

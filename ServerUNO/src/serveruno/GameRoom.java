@@ -35,7 +35,7 @@ public class GameRoom{
     private List<ClientHandler> players;//o usuarios, es lo mismo
     
     //JUEGO
-    Carta[] diccionario; //diccionario
+    Carta[] diccionario= defineDictionary(); //diccionario
     ServerCards juegoCartas; //baraja de comida
     int cartaMesa; // mesa actual 
     int aumento; //como aumenta el turno 
@@ -83,10 +83,46 @@ public class GameRoom{
         return false;
     }
     
+    public Carta[] defineDictionary(){
+        Carta[] juegoCartas = new Carta[62];  
+        int cont=0;
+        String[] colores=new String[] {"Rojo", "Verde","Amarillo", "Azul"};
+        
+        for(int i=0; i<4; i++){
+            for(int j=0; j<10;j++){
+                juegoCartas[cont]= new Carta(colores[i],1, j);// clave vacia 40
+                cont++;
+            }
+            
+            juegoCartas[cont]= new Carta(colores[i],0 ,10 ); //cartaReversa;
+            cont++;
+            juegoCartas[cont]= new Carta(colores[i],0 ,11); //cartaSum2
+            cont++;
+            juegoCartas[cont]= new Carta(colores[i],0 ,12 ); //cartaBloqueo;
+               // clave vacia 52 
+            cont++;
+        }
+        juegoCartas[cont]= new Carta("Negro",0 ,13); //52
+        cont++;
+         juegoCartas[cont]= new Carta("Negro",0 ,14);//53
+        cont++;
+        
+        for(int i=0; i<4; i++){
+           juegoCartas[cont]= new Carta(colores[i],0 ,13); // 58 vacia;
+           cont++;
+        }
+        
+        for(int i=0; i<4; i++){
+           juegoCartas[cont]= new Carta(colores[i],0 ,14); // 62 vacia;
+           cont++;
+        } 
+        //vacia 62
+        
+        return juegoCartas; 
+    }
+    
     public void  inicializaPartida() throws IOException{
-       Baraja d= new Baraja();
-       diccionario= new Carta[62];
-       diccionario=d.getJuegoCartas();
+       //diccionario= defineDictionary();
        juegoCartas= new ServerCards();
        List<String> message= new ArrayList<>();
        message.add("ok");
@@ -112,12 +148,28 @@ public class GameRoom{
     //y en clienthandler se quitaria nuevoTurno (cambiariamos) , y ya no se usaria esta funciom
     //aun no lo cambio porque tiene error de la excepcion que falta completar
     public void reenvioInforacionUsuario() throws IOException{
-        inicializarInfo();//manda turno actul, carta mesa, bandera
-       for(int j=0; j<activeUsers; j++){
-            darTurno(j);  //mandamos turnos especificos
-             reenvioCartasU(j);
-            //}catch(IOException){}
+        
+        List<String> message= new ArrayList<>();
+       message.add("ok");
+       System.err.println("jugadores"+ players.size());
+       //no se porque debo poner size ------------------------------------------------------
+       //SI imprimo player.size me sale 0; eso quiere decir que ya no existe ni un jugador 
+       //y es por eso q no me imprime ni un username
+       for(int j=0; j<players.size(); j++){
+           message.add(players.get(j).getUsername());
+           //Nombre jugador
+           System.err.println(players.get(j).getUsername());
         }
+            Message msg = new Message("H", -1,message);                              //Envia Lista de jugadores
+            sendMessageToRoomMembers(msg);
+       
+       for(int j=0; j<players.size(); j++){
+           darTurno(j);  //mandamos turnos especificos
+           reenvioCartasU(j);
+        }
+       
+       inicializarInfo();//manda turno actul, carta mesa, bandera
+        System.err.println("turno actual"+ turno); // esto si lo imprime bien 
     }
     
    public void reenvioCartasU(int j) throws IOException{
@@ -158,6 +210,7 @@ public class GameRoom{
         ClientHandler player = players.get(i);
         List<String> cartas = new ArrayList<>();
         cartas.add("ok");
+        player.emptyCartas(); 
         for(int j=0; j<7; j++){
             num = juegoCartas.darComida();  
             player.setCarta(num);//damos cartas
@@ -330,6 +383,16 @@ public class GameRoom{
     public void removeUserFromRoom(ClientHandler usr){
         players.remove(usr);
         activeUsers--;        
+    }
+    
+    public void removeUserCardsFromGame(ClientHandler usr){
+        for(int i=0; i<usr.getSizeCartas(); i++){
+            juegoCartas.regresaCartaUsuario(usr.getCarta(i));  
+        }  
+        players.remove(usr);
+        if(turno> players.size()-1){
+           aumentoTurno();
+        }
     }
     
     public Boolean isPlayerInRoom(Socket s){

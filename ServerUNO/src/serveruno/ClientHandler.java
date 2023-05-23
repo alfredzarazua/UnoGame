@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ClientServer.Message;
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,10 @@ public class ClientHandler implements Runnable{
     
     public int getSizeCartas(){
         return cartas.size();
+    }
+    
+    public void emptyCartas(){
+        cartas.clear();
     }
     
     public void setUserName(String name){
@@ -283,7 +288,80 @@ public class ClientHandler implements Runnable{
                                 currentRoom2.nuevoTurno();
                             } 
                             } 
+                        
                         break;
+                        
+                        case"U":
+                            // si un usuario lo presiona, y queda 1 solo jugador
+                            //ambos deberan salirse de la partida
+                            //si son mas de 2, y se sale uno, continua el juego y actualiza toda la informacion 
+                            if("ok".equals(msg.parameters.get(0))){
+                             GameRoom currentRoom2 = manager.getMyCurrentRoom(idRoomJoined);
+                             
+                                //regreso las cartas del usuario que presiono boton 
+                                /*ERROR/////////////////////////////////////////
+                                removeUserCardsFromGame(this) solo quita las cartas del jugador que salio 
+                                por lo que se supone que deberiamos tambien llamar a
+                                removeUserFromRoom(this); eue esta comentado 
+                                Esto porque sin hacerlo ya solo me sale un jugador si imprimo activeUsers
+                                
+                                */
+                                currentRoom2.removeUserCardsFromGame(this);
+                                //elimino al jugador que presiono boton
+                                manager.removeClient(this.clientId, this.socket.getInetAddress(), this.idRoomJoined);
+                                //currentRoom2.removeUserFromRoom(this); 
+                                
+                                System.err.println("Clientes actuales 1 :"+ currentRoom2.getActiveUsers());
+                               
+                                
+                             if(currentRoom2.getActiveUsers()==1){
+                                 currentRoom2.reenvioInforacionUsuario();
+                                 
+                                 /* esto notifica al jugador que esta solo, que esta solo 
+                                 el problema es  que no funciona lo anterior
+                                 
+  
+                                 */
+                                 /*
+                                 response = new ArrayList<>();
+                                  response.add("ok");
+                                  resp = new Message("V", -1, response);
+                                  currentRoom2.sendMessageToRoomMembers(resp);*/
+                                  //eliminar usuario que cerro la ventana  
+                                 //mandar a todos los que quedan (solo es 1) que ya no quedan jugadores   
+                             }else if(currentRoom2.getActiveUsers()>1){
+                                 currentRoom2.reenvioInforacionUsuario();
+                             }
+                                    /* TAMBIEN HAY UN PROBLEMA EN GAMEROOM 
+                             en la funcion de reenvioInformacion, y es el mism problema (ve a ella a leer lo q escribi) 
+                             
+                             1. si imprimo el tamaño del arreglo de los jugadores me muestra q es 0 
+                             2. si descomento removeUserFromRoom(this) e imprime active user me sale 0 
+                             es decir que hay un momento antes de que llegue a este mensaje que borran a almenos 1 jugador
+                             Donde? no se 
+                             
+                             */
+                             
+                              
+                                response = new ArrayList<>();
+                                response.add("ok");
+                                response.addAll(manager.getAllRoomsToString());
+                                //Añadir sala como respuesta y num de jugadores
+                                resp = new Message("U", -1, response);
+                                sendMessage(resp);
+                            }
+                            break;
+                            
+                        case "W":
+                            if("ok".equals(msg.parameters.get(0))){
+                               GameRoom currentRoom2 = manager.getMyCurrentRoom(idRoomJoined);
+                                if(currentRoom2 != null){
+                                    //iniciar juego
+                                    currentRoom2.inicializaPartida();  
+                                } 
+                            }
+                            break;
+                            
                         
                 } 
             }

@@ -82,6 +82,33 @@ public class Partida extends ClientUNO{
         }                        
     }
     
+    public void exitPlayer() throws IOException{
+        /*
+    }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notificación");
+        alert.setHeaderText("No hay mas jugadores disponibles");
+        alert.setContentText("Deseas abandonar la partida?");
+        
+        if(alert.showAndWait().get()==ButtonType.OK){*/
+        List <String> resp = new ArrayList<>();
+        resp.add("ok");
+        Message message= new Message("U", -1,resp);  
+        StageData data = (StageData) stage.getUserData();
+        data.connection.sendMessage(message);
+       // }
+        
+    }
+    
+    public void loadH(){
+        GameController controller = loader.getController();
+        try{
+            controller.loadHome();
+        }catch(IOException e){
+            e.printStackTrace();
+        }                        
+    }
+    
     //Ocultar spinner y mostrar mensaje de error
     public void loginFailed(String msg){
         LoginController controller = loader.getController();
@@ -280,10 +307,12 @@ public class Partida extends ClientUNO{
     }
     
      public void setWinner(){
-        
         GameController controller = loader.getController();  
+        
         controller.inicializarPartida();
-        controller.renderNombreGanador("HA GANADO " +usernames.get(turnoActual)+ " <3 <3");  
+        controller.setWinner(usernames.get(turnoActual));
+       
+        
      }
      
     public void showColorButtoms(){

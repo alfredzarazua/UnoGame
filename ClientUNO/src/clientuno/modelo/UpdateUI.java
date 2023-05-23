@@ -1,6 +1,9 @@
 
 package clientuno.modelo;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
@@ -70,7 +73,8 @@ public class UpdateUI extends Task<Void>{
                 case 12 -> partida.showColorButtoms();           // Muestra botones
                 case 13 -> partida.setWinner();              //Actualiza nombre del ganador 
                 case 14 -> partida.showText();                    //mostrar si no es compatible
-                //case 15 -> partida.enableShift();             //habilitar botones si es tu turno
+                case 15 -> partida.loadH();             //habilitar botones si es tu turno
+                //case 16 -> partida.showExitSituation(); 
             }
         });                               
         return null;                        
