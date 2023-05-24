@@ -33,15 +33,15 @@ public class MySQL extends ServerUNO{
                     System.out.println("\tNew User Logged in");
                     resp="ok";
                 }else{
-                    resp="Invalid user or password";
+                    resp="Usuario o Contraseña incorrectos";
                 }              
             }else{
                 System.out.println("\tInvalid user or password");
-                resp="Invalid user or password";
+                resp="Usuario o Contraseña incorrectos";
             }
                    
         }catch(SQLException e){      
-            resp = "There was an error: " + e.getMessage();
+            resp = "Hubo un error: " + e.getMessage();
         }
         return resp;
     }
@@ -62,7 +62,7 @@ public class MySQL extends ServerUNO{
             String query = "SELECT Nombre FROM catalogo_usuarios WHERE Id_usuario =  '".concat(Id_user).concat("'");            
             rs = st.executeQuery(query);
             if(rs.next()){
-                resp = "Error: User already exists";
+                resp = "Error: Este usuario ya existe!";
                 System.out.println("\tError: User already exists in DB");
             }else{
                 String query2 = "INSERT INTO catalogo_usuarios(Id_usuario,Nombre,Contraseña) VALUES ('"+Id_user+"',"+"'"+Nombre+"',"+"'"+Contraseña+"')";

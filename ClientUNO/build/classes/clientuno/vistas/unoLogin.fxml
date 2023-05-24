@@ -32,7 +32,7 @@
                   <Image url="@../Imagenes/Candado.png" />
                </image>
             </ImageView>
-            <Label layoutX="158.0" layoutY="34.0" text="LogIn">
+            <Label layoutX="121.0" layoutY="34.0" text="Iniciar Sesión">
                <font>
                   <Font name="Calibri Bold" size="24.0" />
                </font>
@@ -42,24 +42,24 @@
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="52.0" layoutY="252.0" text="Password" textFill="#ed1c24">
+            <Label layoutX="44.0" layoutY="251.0" text="Contraseña" textFill="#ed1c24">
                <font>
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
             <TextField fx:id="TextFieldNombre" layoutX="172.0" layoutY="203.0" promptText="Username" />
-            <PasswordField fx:id="TextFieldContraseña" layoutX="172.0" layoutY="253.0" promptText="Password" />
-            <Button layoutX="112.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="149.0" style="-fx-background-color: #218d38;" text="LogIn" textAlignment="CENTER">
+            <PasswordField fx:id="TextFieldContraseña" layoutX="172.0" layoutY="253.0" promptText="Contraseña" />
+            <Button layoutX="112.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="149.0" style="-fx-background-color: #218d38;" text="Iniciar sesión" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Button>
-            <Label layoutX="77.0" layoutY="460.0" text="You don't have an account,">
+            <Label layoutX="95.0" layoutY="460.0" text="¿No tienes una cuenta?,">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="224.0" layoutY="457.0" onAction="#loadRegisterForm" text="create one!" textAlignment="CENTER">
+            <Hyperlink layoutX="224.0" layoutY="457.0" onAction="#loadRegisterForm" text="regístrate" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font></Hyperlink>

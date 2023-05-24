@@ -1,9 +1,5 @@
 
 package clientuno.modelo;
-
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
@@ -61,7 +57,7 @@ public class UpdateUI extends Task<Void>{
             switch(runId){
                 case 1 -> partida.registerSuccessful();          //Auto login, ir a Home
                 case 2 -> partida.registerFailed(msg);           //Mostrar mensaje de error
-                case 3 -> partida.loginSuccessful();             //ir a Home
+                case 3 -> partida.goHome();                      //ir a Home
                 case 4 -> partida.loginFailed(msg);              //Mostrar mensaje de error
                 case 5 -> partida.joinedToRoom();                //ir a sala de espera
                 case 6 -> partida.rejectedJoinToRoom(msg);       //Mostrar mensaje de error
@@ -71,10 +67,10 @@ public class UpdateUI extends Task<Void>{
                 case 10 -> partida.updateCards();                //Actualizar cartas del usuario
                 case 11 -> partida.updateCartaMesa();            //Actualizar Carta de mesa
                 case 12 -> partida.showColorButtoms();           // Muestra botones
-                case 13 -> partida.setWinner();              //Actualiza nombre del ganador 
-                case 14 -> partida.showText();                    //mostrar si no es compatible
-                case 15 -> partida.loadH();             //habilitar botones si es tu turno
-                //case 16 -> partida.showExitSituation(); 
+                case 13 -> partida.setWinner();                  //Actualiza nombre del ganador 
+                case 14 -> partida.showText();                   //mostrar si no es compatible
+                case 15 -> partida.loadH();                      //habilitar botones si es tu turno
+                case 16 -> partida.exitPlayer();                 //Notificar que esta solo en el juego
             }
         });                               
         return null;                        

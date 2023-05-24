@@ -19,23 +19,23 @@
                   <Image url="@../Imagenes/FondoUno.png" />
                </image>
             </ImageView>
-            <Label fx:id="mainMessage" alignment="CENTER" layoutX="107.0" layoutY="282.0" prefHeight="35.0" prefWidth="570.0" text="Wait for others players to join this room..." textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="mainMessage" alignment="CENTER" layoutX="29.0" layoutY="282.0" prefHeight="35.0" prefWidth="752.0" text="Espera a que se unan otros usuarios" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="23.0" />
                </font>
             </Label>
             <ProgressIndicator fx:id="spinner" blendMode="ADD" cache="true" cacheHint="QUALITY" depthTest="ENABLE" layoutX="391.0" layoutY="327.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
-            <Label layoutX="345.0" layoutY="388.0" text="Connected:" textFill="WHITE">
+            <Label layoutX="299.0" layoutY="388.0" text="Jugadores en la sala:" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="labelActiveUsers" layoutX="439.0" layoutY="388.0" text="0/4" textFill="WHITE">
+            <Label fx:id="labelActiveUsers" layoutX="460.0" layoutY="388.0" text="0/4" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="botonIniciarPartida" layoutX="332.0" layoutY="482.0" mnemonicParsing="false" onAction="#solicitarInicioPartida" prefHeight="34.0" prefWidth="146.0" style="-fx-background-color: #54a954;" text="Play" textAlignment="CENTER">
+            <Button fx:id="botonIniciarPartida" layoutX="332.0" layoutY="482.0" mnemonicParsing="false" onAction="#solicitarInicioPartida" prefHeight="34.0" prefWidth="146.0" style="-fx-background-color: #54a954;" text="Iniciar" textAlignment="CENTER">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>

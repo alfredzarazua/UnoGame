@@ -59,7 +59,7 @@ public class LoginController {
         scene = new Scene(root); 
         stage.setScene(scene);                        
         
-        stage.setTitle("Home");
+        stage.setTitle("Inicio");
         HomeController controller = loader.getController();  
         controller.setUsername(data.username);
         //traer datos antes
@@ -84,7 +84,7 @@ public class LoginController {
                    
         scene = new Scene(root); 
         stage.setScene(scene);
-        stage.setTitle("Register");
+        stage.setTitle("Registrarse");
         RegisterController controller = loader.getController();        
         controller.setInitState();
         data.partida.setController(controller);                    //Actualizamos controlador de partida

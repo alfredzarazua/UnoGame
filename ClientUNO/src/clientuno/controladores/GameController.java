@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package clientuno.controladores;
 
 
@@ -145,7 +142,7 @@ public class GameController {
         double x = 15, y = 35;
         for (String username : usernames) {
             if(username.equals(data.username)){
-                nameLabel = new Label(username + " (You)");                                
+                nameLabel = new Label(username + " (Tú)");                                
             }else{
                 nameLabel = new Label(username);
             }
@@ -283,7 +280,7 @@ public class GameController {
         scene = new Scene(root); 
         stage.setScene(scene);                        
         
-        stage.setTitle("Home");
+        stage.setTitle("Inicio");
         HomeController controller = loader.getController();  
         controller.setUsername(data.username);
         //traer datos antes
@@ -295,9 +292,9 @@ public class GameController {
     
     public void pressExit(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Close UNO");
-        alert.setHeaderText("You´re about to exit");
-        alert.setContentText("Do you want to exit?");
+        alert.setTitle("Salir");
+        alert.setHeaderText("Salir de la partida");
+        alert.setContentText("¿Deseas abandonar la partida?");
         
         
         if(alert.showAndWait().get()==ButtonType.OK){
@@ -307,8 +304,7 @@ public class GameController {
 
             List<String> msg = new ArrayList<>();
             msg.add("ok");
-            Message message= new Message("U", -1,msg);
-            //loadGameView(); //no se debe mandar llamar aqui, este metodo va en la respuesta que envie el servidor(la respuesta es a todos los miembros de la sala)        
+            Message message= new Message("U", -1,msg);            
             data.connection.sendMessage(message);   
             stage.setUserData(data);
         }

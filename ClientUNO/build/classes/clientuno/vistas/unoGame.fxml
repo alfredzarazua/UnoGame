@@ -140,7 +140,7 @@
          </children>
       </Pane>
       <ScrollPane fx:id="Cartas_juego" layoutX="14.0" layoutY="264.0" prefHeight="410.0" prefWidth="613.0" style="-fx-background-color: ;" vbarPolicy="ALWAYS" />
-      <Pane fx:id="Win_pane" layoutX="194.0" layoutY="63.0" prefHeight="555.0" prefWidth="780.0" style="-fx-background-color: #000000;">
+      <Pane fx:id="Win_pane" layoutX="194.0" layoutY="63.0" prefHeight="555.0" prefWidth="780.0" style="-fx-background-color: #000000;" visible="false">
          <children>
             <ImageView fitHeight="296.0" fitWidth="815.0" layoutX="90.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
                <image>

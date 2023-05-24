@@ -32,7 +32,7 @@ public class GameRoom{
     private String id;
     private int activeUsers;
     private String rName;
-    private List<ClientHandler> players;//o usuarios, es lo mismo
+    private List<ClientThread> players;//o usuarios, es lo mismo
     
     //JUEGO
     Carta[] diccionario= defineDictionary(); //diccionario
@@ -74,7 +74,7 @@ public class GameRoom{
         return id;
     }
     //Agrega un usuario a la sala
-    public Boolean joinUser(ClientHandler newUser){
+    public Boolean joinUser(ClientThread newUser){
         if(activeUsers < 4){
            players.add(newUser);
            activeUsers++; 
@@ -147,9 +147,9 @@ public class GameRoom{
     //sinfuciona como esta pensado debe de cambiarse donde se llama inicializar Info 
     //y en clienthandler se quitaria nuevoTurno (cambiariamos) , y ya no se usaria esta funciom
     //aun no lo cambio porque tiene error de la excepcion que falta completar
-    public void reenvioInforacionUsuario() throws IOException{
+    public void reenvioInformacionUsuario() throws IOException{
         
-        List<String> message= new ArrayList<>();
+       List<String> message= new ArrayList<>();
        message.add("ok");
        System.err.println("jugadores"+ players.size());
        //no se porque debo poner size ------------------------------------------------------
@@ -173,7 +173,7 @@ public class GameRoom{
     }
     
    public void reenvioCartasU(int j) throws IOException{
-       ClientHandler player = players.get(j);
+       ClientThread player = players.get(j);
              List<String> cartas = new ArrayList<>();
              cartas.add("ok");
             for(int i=0; i<player.getSizeCartas(); i++){
@@ -207,7 +207,7 @@ public class GameRoom{
     //agrega al arreglo de cartas en el servidor 
     public void darJuegoCartas(int i) throws IOException{
         int num;
-        ClientHandler player = players.get(i);
+        ClientThread player = players.get(i);
         List<String> cartas = new ArrayList<>();
         cartas.add("ok");
         player.emptyCartas(); 
@@ -223,7 +223,7 @@ public class GameRoom{
         //regresa numero del juego de cartas
     public String getComida(){
         int carta= juegoCartas.darComida();
-        ClientHandler player = players.get(turno);
+        ClientThread player = players.get(turno);
         player.setCarta(carta);
         return Integer.toString(carta);        
     }
@@ -289,7 +289,7 @@ public class GameRoom{
     
     public void eliminarCartaCliente(int num) throws IOException{
         
-        ClientHandler player = players.get(turno);
+        ClientThread player = players.get(turno);
         player.elimCarta(num);
         
         juegoCartas.regresaCartaUsuario(num);
@@ -374,18 +374,18 @@ public class GameRoom{
     
     //Metodo para enviar actualizaciones del estado del juego a los miembros de la sala
     public void sendMessageToRoomMembers(Message msg) throws IOException{
-        for (ClientHandler player : players) {
+        for (ClientThread player : players) {
             if(!player.getSocket().isOutputShutdown())
                 player.sendMessage(msg);
         }
     }
     //Elimina un jugador de la sala
-    public void removeUserFromRoom(ClientHandler usr){
+    public void removeUserFromRoom(ClientThread usr){
         players.remove(usr);
         activeUsers--;        
     }
     
-    public void removeUserCardsFromGame(ClientHandler usr){
+    public void removeUserCardsFromGame(ClientThread usr){
         for(int i=0; i<usr.getSizeCartas(); i++){
             juegoCartas.regresaCartaUsuario(usr.getCarta(i));  
         }  
@@ -396,7 +396,7 @@ public class GameRoom{
     }
     
     public Boolean isPlayerInRoom(Socket s){
-        for (ClientHandler player : players) {
+        for (ClientThread player : players) {
             if(player.getSocket().getInetAddress().equals(s.getInetAddress())){
                 return true;
             }

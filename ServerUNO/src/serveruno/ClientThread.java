@@ -9,11 +9,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ClientServer.Message;
-import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.util.converter.IntegerStringConverter;
 
 /*
 Clase para atender las solicitudes del cliente, 
@@ -25,7 +23,7 @@ dado que es la clase que se usa para comunicarse de manera individual con el ser
 
 */
 
-public class ClientHandler implements Runnable{                            
+public class ClientThread implements Runnable{                            
     private Socket socket;
     private long clientId;
     private String idRoomJoined;
@@ -65,7 +63,7 @@ public class ClientHandler implements Runnable{
         return userName;                
     }
     
-    public ClientHandler(ClientManager m, Socket socket) {
+    public ClientThread(ClientManager m, Socket socket) {
       this.socket = socket;
       manager = m;
     }
@@ -81,7 +79,7 @@ public class ClientHandler implements Runnable{
             System.err.println("\tA client lost or finished its connection"); 
             manager.removeClient(clientId, socket.getInetAddress(), idRoomJoined);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void setIdRoomJoined(String id){
@@ -136,7 +134,7 @@ public class ClientHandler implements Runnable{
                             response.add(ex.getMessage());
                             Message resp = new Message("A", -1, response);
                             sendMessage(resp);
-                            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
                         }                    
                         break;
 
@@ -160,7 +158,7 @@ public class ClientHandler implements Runnable{
                             response.add(ex.getMessage());
                             Message resp = new Message("B", -1, response);
                             sendMessage(resp);
-                            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
                         }                    
                         break;
                     case "C"://Añadir usuario a una sala
@@ -291,64 +289,64 @@ public class ClientHandler implements Runnable{
                         
                         break;
                         
-                        case"U":
+                        case"U"://Un usuario presionó el boton Salir(Solo de la partida NO de la aplicacion)
                             // si un usuario lo presiona, y queda 1 solo jugador
                             //ambos deberan salirse de la partida
                             //si son mas de 2, y se sale uno, continua el juego y actualiza toda la informacion 
-                            if("ok".equals(msg.parameters.get(0))){
-                             GameRoom currentRoom2 = manager.getMyCurrentRoom(idRoomJoined);
+                            if("ok".equals(msg.parameters.get(0))){                                   
+                                GameRoom currentRoom2 = manager.getMyCurrentRoom(idRoomJoined);
                              
                                 //regreso las cartas del usuario que presiono boton 
                                 /*ERROR/////////////////////////////////////////
                                 removeUserCardsFromGame(this) solo quita las cartas del jugador que salio 
                                 por lo que se supone que deberiamos tambien llamar a
-                                removeUserFromRoom(this); eue esta comentado 
+                                removeUserFromRoom(this); que esta comentado 
                                 Esto porque sin hacerlo ya solo me sale un jugador si imprimo activeUsers
                                 
                                 */
-                                currentRoom2.removeUserCardsFromGame(this);
-                                //elimino al jugador que presiono boton
-                                manager.removeClient(this.clientId, this.socket.getInetAddress(), this.idRoomJoined);
-                                //currentRoom2.removeUserFromRoom(this); 
+                                currentRoom2.removeUserCardsFromGame(this);                                
+                                //eliminar de la SALA
+                                currentRoom2.removeUserFromRoom(this);
                                 
-                                System.err.println("Clientes actuales 1 :"+ currentRoom2.getActiveUsers());
-                               
-                                
-                             if(currentRoom2.getActiveUsers()==1){
-                                 currentRoom2.reenvioInforacionUsuario();
-                                 
-                                 /* esto notifica al jugador que esta solo, que esta solo 
-                                 el problema es  que no funciona lo anterior
-                                 
-  
-                                 */
-                                 /*
-                                 response = new ArrayList<>();
-                                  response.add("ok");
-                                  resp = new Message("V", -1, response);
-                                  currentRoom2.sendMessageToRoomMembers(resp);*/
-                                  //eliminar usuario que cerro la ventana  
-                                 //mandar a todos los que quedan (solo es 1) que ya no quedan jugadores   
-                             }else if(currentRoom2.getActiveUsers()>1){
-                                 currentRoom2.reenvioInforacionUsuario();
-                             }
-                                    /* TAMBIEN HAY UN PROBLEMA EN GAMEROOM 
-                             en la funcion de reenvioInformacion, y es el mism problema (ve a ella a leer lo q escribi) 
-                             
-                             1. si imprimo el tamaño del arreglo de los jugadores me muestra q es 0 
-                             2. si descomento removeUserFromRoom(this) e imprime active user me sale 0 
-                             es decir que hay un momento antes de que llegue a este mensaje que borran a almenos 1 jugador
-                             Donde? no se 
-                             
-                             */
-                             
-                              
+                                //enviar actualizacion de numero de jugadores en la sala
+                                int total = currentRoom2.getActiveUsers();
+                                response = new ArrayList<>();
+                                response.add("ok");                            
+                                response.add(String.valueOf(total));
+                                response.add(idRoomJoined);
+                                resp = new Message("D", -1, response); 
+                                manager.sendMessageToAllClients(resp); 
+                                  
+                                //Enviar orden de ir a Home, enviar datos de las salas disponibles
                                 response = new ArrayList<>();
                                 response.add("ok");
-                                response.addAll(manager.getAllRoomsToString());
-                                //Añadir sala como respuesta y num de jugadores
-                                resp = new Message("U", -1, response);
-                                sendMessage(resp);
+                                response.addAll(manager.getAllRoomsToString());                                
+                                resp = new Message("B", -1, response);
+                                sendMessage(resp);//Solo el cliente que presiono el boton salir será enviado a home
+                                                                
+                               
+                                
+                                if(currentRoom2.getActiveUsers()==1){                                                                                                                                                                     
+                                    /* esto notifica al jugador que se quedó solo en la sala                                   
+                                    */
+
+                                     response = new ArrayList<>();
+                                     response.add("ok");
+                                     resp = new Message("V", -1, response);
+                                     currentRoom2.sendMessageToRoomMembers(resp);                                                                   
+                                }else if(currentRoom2.getActiveUsers()>1){
+                                    System.err.println("UsuariosActivos: "+currentRoom2.getActiveUsers());
+                                    currentRoom2.reenvioInformacionUsuario();
+                                }
+                                /* TAMBIEN HAY UN PROBLEMA EN GAMEROOM 
+                                en la funcion de reenvioInformacion, y es el mism problema (ve a ella a leer lo q escribi) 
+
+                                1. si imprimo el tamaño del arreglo de los jugadores me muestra q es 0 
+                                2. si descomento removeUserFromRoom(this) e imprime active user me sale 0 
+                                es decir que hay un momento antes de que llegue a este mensaje que borran a almenos 1 jugador
+                                Donde? no se 
+
+                                */                             
                             }
                             break;
                             

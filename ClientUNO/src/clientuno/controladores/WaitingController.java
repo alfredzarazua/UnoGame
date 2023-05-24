@@ -49,7 +49,7 @@ public class WaitingController {
     }
     
     public void setMainMessage(String userName){
-        mainMessage.setText("Hey "+userName+", Wait for others players to join this room...");
+        mainMessage.setText("Hey "+userName+", Espera a que otros jugadores se unan a tu sala...");
     }
     
     public void setRoomDataMessage(String idRoom, String nameRoom){

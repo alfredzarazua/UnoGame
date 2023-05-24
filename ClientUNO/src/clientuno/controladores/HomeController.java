@@ -47,7 +47,7 @@ public class HomeController {
                       
         scene = new Scene(root); 
         stage.setScene(scene);
-        stage.setTitle("Instructions");
+        stage.setTitle("Instrucciones del juego");
         InstructionsController controller = loader.getController();
         controller.setInitState();
         

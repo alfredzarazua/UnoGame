@@ -27,46 +27,46 @@
    <right>
       <AnchorPane prefHeight="530.0" prefWidth="493.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="144.0" layoutY="150.0" text="Register">
+            <Label layoutX="133.0" layoutY="150.0" text="Registrarse">
                <font>
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="79.0" layoutY="237.0" text="Username" textFill="#e60012">
+            <Label layoutX="103.0" layoutY="237.0" text="Username" textFill="#e60012">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="77.0" layoutY="197.0" prefHeight="28.0" prefWidth="97.0" text="Gamer Tag" textFill="#e60012">
+            <Label layoutX="99.0" layoutY="192.0" prefHeight="28.0" prefWidth="97.0" text="Gamer Tag" textFill="#e60012">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="83.0" layoutY="281.0" text="Password" textFill="#e60012">
+            <Label layoutX="94.0" layoutY="281.0" text="Contraseña" textFill="#e60012">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="11.0" layoutY="323.0" text="Confirm password" textFill="#e60012">
+            <Label layoutX="7.0" layoutY="323.0" text="Confirmar contraseña" textFill="#e60012">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="TextFieldNombre" layoutX="181.0" layoutY="198.0" />
-            <TextField fx:id="TextFieldUsername" layoutX="181.0" layoutY="236.0" />
-            <PasswordField fx:id="TextFieldContraseña" layoutX="181.0" layoutY="280.0" />
-            <PasswordField fx:id="TextFieldContraseña2" layoutX="180.0" layoutY="322.0" />
-            <Button fx:id="register" layoutX="116.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #0060b0;" text="Register" textFill="#fadf0e">
+            <TextField fx:id="TextFieldNombre" layoutX="198.0" layoutY="193.0" />
+            <TextField fx:id="TextFieldUsername" layoutX="198.0" layoutY="236.0" />
+            <PasswordField fx:id="TextFieldContraseña" layoutX="198.0" layoutY="280.0" />
+            <PasswordField fx:id="TextFieldContraseña2" layoutX="198.0" layoutY="322.0" />
+            <Button fx:id="register" layoutX="129.0" layoutY="396.0" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #0060b0;" text="Registrarme" textFill="#fadf0e">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
             </Button>
-            <Label layoutX="85.0" layoutY="481.0" text="You already have an account,">
+            <Label layoutX="98.0" layoutY="481.0" text="¿Ya tienes una cuenta?">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="login" layoutX="244.0" layoutY="478.0" onAction="#loadWindow" text="log in!">
+            <Hyperlink fx:id="login" layoutX="226.0" layoutY="478.0" onAction="#loadWindow" text="inicia sesión">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font></Hyperlink>
@@ -75,12 +75,12 @@
                   <Image url="@../Imagenes/Uno.png" />
                </image>
             </ImageView>
-            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="371.0" prefHeight="17.0" prefWidth="313.0" text="Error Message" textFill="#e40d0d">
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="366.0" prefHeight="17.0" prefWidth="313.0" text="Error Message" textFill="#e40d0d">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font>
             </Label>
-            <ProgressIndicator fx:id="spinner" blendMode="EXCLUSION" layoutX="167.0" layoutY="444.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
+            <ProgressIndicator fx:id="spinner" blendMode="EXCLUSION" layoutX="182.0" layoutY="444.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="28.0" />
          </children>
       </AnchorPane>
    </right>

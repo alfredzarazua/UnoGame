@@ -5,12 +5,9 @@ import ClientServer.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+
 
 
 //clase del Listenner Thread
@@ -184,21 +181,18 @@ public class ServerListener implements Runnable{
                         new Thread(new UpdateUI(partida, 13)).start();
                         break;
                         
-                    case "U": 
+                    case "U": //no se usa
                         if(msg.parameters.get(0).equals("ok")){                                                                                                                  
                             partida.clearStageParamsList();
-                            partida.setStageParamsList(msg.parameters);         //se recibe una lista de salas disponibles
-                            new Thread(new UpdateUI(partida, 15)).start();       //Actualizar Interfaz                                                     
+                            partida.setStageParamsList(msg.parameters);         
+                            new Thread(new UpdateUI(partida, 15)).start();      //Actualizar Interfaz                                                     
                         } 
                        break; 
                        
-                    case "V":
-                        if(msg.parameters.get(0).equals("ok")){                                                                                                                  
-                                   //se recibe una lista de salas disponibles
-                            //new Thread(new UpdateUI(partida, 16)).start();       //Actualizar Interfaz                                                     
-                            //new Thread(new UpdateUI(partida, 15)).start();
-                            partida.exitPlayer();
-                            System.out.println("Hola mucho gusto");
+                    case "V"://Solo hay un usuario en el juego, automaticamente ir a home
+                        if(msg.parameters.get(0).equals("ok")){ 
+                            
+                            new Thread(new UpdateUI(partida, 16)).start();       //Mostrar notificacion de salida de la partida                                                                                 
                         } 
                         break;
                     

@@ -13,7 +13,7 @@
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="600.0" style="-fx-background-color: #0060b0;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="289.0" layoutY="5.0" text="Instructions" textFill="#000001">
+            <Label layoutX="289.0" layoutY="5.0" text="Instrucciones" textFill="#000001">
                <font>
                   <Font name="Calibri Bold" size="65.0" />
                </font>
@@ -99,7 +99,7 @@
                   <Font name="Calibri" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="return_to" layoutX="715.0" layoutY="553.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="48.0" prefWidth="169.0" style="-fx-background-color: #218d38;" text="Return " textFill="#000001">
+            <Button fx:id="return_to" layoutX="715.0" layoutY="553.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="48.0" prefWidth="169.0" style="-fx-background-color: #218d38;" text="Regresar" textFill="#000001">
                <font>
                   <Font name="Calibri Bold" size="25.0" />
                </font>

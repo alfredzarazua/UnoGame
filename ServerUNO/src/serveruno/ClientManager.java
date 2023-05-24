@@ -30,7 +30,7 @@ Funciones principales
 public class ClientManager {    
     private final List<GameRoom> serverRooms;
     private final List<Thread> clientThreadsList;
-    private final List<ClientHandler> clientsList;
+    private final List<ClientThread> clientsList;
     private final Object lock;                                                  //Monitor de acceso a las listas
     
     
@@ -45,17 +45,17 @@ public class ClientManager {
         serverRooms.add(new GameRoom(name, id));
     }
     
-    public void addClient(ClientHandler client, Thread t){        
+    public void addClient(ClientThread client, Thread t){        
         clientThreadsList.add(t);
         clientsList.add(client);
     }
     //id del hilo listener, ip del cliente
-    public void removeClient(long id, InetAddress ip, String idJoinedRoom){                  
-        
-        ClientHandler tmpClient = null;
-        for (ClientHandler obj : clientsList) {
-            if(obj.getSocket().getInetAddress().equals(ip)){
-                tmpClient = obj;
+    public void removeClient(long id, InetAddress ip, String idJoinedRoom){     //Este metodo se ejecuta cuando ocurre           
+                                                                                //una excepcion en el Hilo de un cliente
+        ClientThread tmpClient = null;                                          //cuando socket se cierrra es por 2 situaciones     
+        for (ClientThread obj : clientsList) {                                  //La primera es que el cliente cerró la aplicacion
+            if(obj.getSocket().getInetAddress().equals(ip)){                    //la segunda es que el cliente perdió la conexion a internet
+                tmpClient = obj;                                                
                 break;
             }
         }
@@ -98,7 +98,7 @@ public class ClientManager {
         System.out.println("\tListener Thread killed: id = "+id);
     }
     
-    public Boolean addUserToRoom(ClientHandler user, String roomId){
+    public Boolean addUserToRoom(ClientThread user, String roomId){
         System.out.println("\tAdding user "+user.getSocket().getInetAddress() + " to room: "+roomId);
         GameRoom destinyRoom = null;
         for (GameRoom g : serverRooms) {
@@ -117,7 +117,7 @@ public class ClientManager {
      lo mejor es usar la ip del cliente
     */
     public void sendMessageToAllClients(Message msg){        
-        for (ClientHandler client : clientsList) {                                          
+        for (ClientThread client : clientsList) {                                          
             try {                                   
                 client.sendMessage(msg);
             } catch (IOException ex) {

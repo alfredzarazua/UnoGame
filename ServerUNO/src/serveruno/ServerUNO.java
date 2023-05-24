@@ -29,7 +29,7 @@ public class ServerUNO {
         
         while (true) {
             Socket clientSocket = serverSocket.accept();
-            ClientHandler nc = new ClientHandler(manager, clientSocket);
+            ClientThread nc = new ClientThread(manager, clientSocket);
             Thread clientThread = new Thread(nc);
             clientThread.start();            
             nc.setClientId(clientThread.threadId());            

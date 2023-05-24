@@ -57,7 +57,7 @@ public class Partida extends ClientUNO{
             stage.setUserData(s_data);
             scene = new Scene(root);                           
             stage.setScene(scene); 
-            stage.setTitle("Login");  
+            stage.setTitle("Iniciar sesión");  
             LoginController controller = loader.getController();              
             controller.setInitState();                                    
             stage.show();  
@@ -73,31 +73,47 @@ public class Partida extends ClientUNO{
     }
     
     //Saltar a la ventana de inicio, muestra nombre del jugador
-    public void loginSuccessful(){
-        LoginController controller = loader.getController();
-        try{
-            controller.loadHome();
-        }catch(IOException e){
-            e.printStackTrace();
-        }                        
+    public void goHome(){
+        Object obj = loader.getController();        
+        //si estaba en la sala donde entró/salió alguien (Esta en pantalla de espera)
+        if(obj.getClass().equals(LoginController.class)){
+            try{
+                LoginController controller = loader.getController();
+                controller.loadHome();
+            }catch(IOException e){
+                e.printStackTrace();
+            }             
+        }else if(obj.getClass().equals(GameController.class)){
+            try{
+                GameController controller = loader.getController();
+                controller.loadHome();
+            }catch(IOException e){
+                e.printStackTrace();
+            } 
+            
+        }        
+                               
     }
     
-    public void exitPlayer() throws IOException{
-        /*
-    }
+    public void exitPlayer(){
+            
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Notificación");
-        alert.setHeaderText("No hay mas jugadores disponibles");
-        alert.setContentText("Deseas abandonar la partida?");
+        alert.setHeaderText("No hay más jugadores en tu sala");
+        alert.setContentText("Serás redirigido a UnoHome");        
         
-        if(alert.showAndWait().get()==ButtonType.OK){*/
-        List <String> resp = new ArrayList<>();
-        resp.add("ok");
-        Message message= new Message("U", -1,resp);  
-        StageData data = (StageData) stage.getUserData();
-        data.connection.sendMessage(message);
-       // }
-        
+        if(alert.showAndWait().get()==ButtonType.OK){
+            List <String> resp = new ArrayList<>();
+            resp.add("ok");
+            Message message= new Message("U", -1,resp);  
+            StageData data = (StageData) stage.getUserData();
+            try {
+                data.connection.sendMessage(message);
+
+            } catch (IOException ex) {
+                Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+            }        
+        }
     }
     
     public void loadH(){
@@ -201,9 +217,20 @@ public class Partida extends ClientUNO{
     //Cierra la aplicacion, detiene el hilo Listener
     public void closeApp(Stage stage){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Close UNO");
-        alert.setHeaderText("You´re about to exit");
-        alert.setContentText("Do you want to exit?");
+        alert.setTitle("Cerrar");
+        alert.setHeaderText("Salir del juego");
+        alert.setContentText("¿Deseas salir de la aplicación?");
+        
+        //Notificar al servidor que el usuario salió de la aplicación
+        List <String> resp = new ArrayList<>();
+        resp.add("ok");
+        Message message= new Message("U", -1,resp);  
+        StageData data = (StageData) stage.getUserData();
+        try {
+            data.connection.sendMessage(message);
+        } catch (IOException ex) {
+            Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     
         if(alert.showAndWait().get()==ButtonType.OK){                                    
             try {
@@ -321,10 +348,13 @@ public class Partida extends ClientUNO{
         controller.habilitaColorPane();  
     }
     
-    //Actualizar todas las cartas del usuario
-    public void updateCards(){
-        GameController controller = loader.getController();                        
-        controller.renderUNOCards(cartas);
+    //Actualizar todas las cartas del usuario      REVISAR
+    public void updateCards(){ //Error aqui El controlador de partida es Waiting y se esta intentando usar GameController
+        Object obj = loader.getController();
+        if(obj.getClass().equals(GameController.class)){
+            GameController controller = loader.getController();                        
+            controller.renderUNOCards(cartas);
+        }        
     }
     
     

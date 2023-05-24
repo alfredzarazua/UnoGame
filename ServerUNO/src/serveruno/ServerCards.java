@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package serveruno;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.security.SecureRandom;
-
 
 class CartaCom{
     int posicion;
@@ -90,8 +84,8 @@ public class ServerCards{
     }
     
     public void regresaCartaUsuario(int num){
-    userCards[num]-=1;
-}
+        userCards[num]-=1;
+    }
     
     private void Barajar(){
         inicializaCartasCant();

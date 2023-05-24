@@ -47,7 +47,7 @@ public class RegisterController extends ClientUNO{
     public void register(ActionEvent event) throws IOException{ 
         if(TextFieldContraseña.getText().equals("") | TextFieldNombre.getText().equals("") | TextFieldUsername.getText().equals("") ){
             
-            setErrorMessage("All fields required!");
+            setErrorMessage("Todos los campos son requeridos!");
             
         }else if(TextFieldContraseña.getText().equals(TextFieldContraseña2.getText())){
             
@@ -69,7 +69,7 @@ public class RegisterController extends ClientUNO{
             stage.setUserData(data);
         }
         if(!TextFieldContraseña.getText().equals(TextFieldContraseña2.getText())){
-            setErrorMessage("Passwords doesn't match!");            
+            setErrorMessage("Las contraseñas no coinciden!");            
         }
     }
     
@@ -86,7 +86,7 @@ public class RegisterController extends ClientUNO{
                 
         scene = new Scene(root); 
         stage.setScene(scene);
-        stage.setTitle("Login");
+        stage.setTitle("Iniciar sesión");
         
         LoginController controller = loader.getController();    
         data.partida.setController(controller);                //Actualizamos controlador de Partida
