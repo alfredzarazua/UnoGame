@@ -5,3 +5,7 @@
 /ServerUNO/build/
 /ServerUNO/build/built-jar.properties
 /ServerUNO/nbproject/private/private.xml
+/ServerUNO/dist/
+/Bibliotecas/CommunicationCS/build/
+/Bibliotecas/CommunicationCS/dist/
+/Bibliotecas/CommunicationCS/nbproject/private/
