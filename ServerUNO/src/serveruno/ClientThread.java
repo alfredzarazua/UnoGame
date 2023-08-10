@@ -141,17 +141,29 @@ public class ClientThread implements Runnable{
                     case "B": //Login usuario
                         MySQL opcion2 = new MySQL();                     
                         try {
-                            System.out.println("\tVerifying user...");                            
-                            String res = opcion2.Login(msg.parameters);                            
-                            List<String> response = new ArrayList<>();
-                            response.add(res);
-                            response.addAll(manager.getAllRoomsToString());
-                            //Añadir sala como respuesta y num de jugadores
-                            Message resp = new Message("B", -1, response);
-                            sendMessage(resp);
-                            if(res.equals("ok")){
-                                setUserName(msg.parameters.get(0));
+                            System.out.println("\tVerifying user..."); 
+                            String user = msg.parameters.get(0);
+                            if(!manager.checkIfLoggedIn(user)){
+                                String res = opcion2.Login(msg.parameters);                            
+                                List<String> response = new ArrayList<>();
+                                response.add(res);
+                                response.addAll(manager.getAllRoomsToString());
+                                //Añadir sala como respuesta y num de jugadores
+                                Message resp = new Message("B", -1, response);
+                                sendMessage(resp);
+                                if(res.equals("ok")){
+                                    setUserName(msg.parameters.get(0));
+                                }
+                            }else{
+                                String res = "Ya iniciaste sesión desde otra pc";
+                                List<String> response = new ArrayList<>();
+                                response.add(res);
+                                response.addAll(manager.getAllRoomsToString());
+                                //Añadir sala como respuesta y num de jugadores
+                                Message resp = new Message("B", -1, response);
+                                sendMessage(resp);
                             }
+                            
                             
                         } catch (SQLException ex) {
                             List<String> response = new ArrayList<>();
@@ -304,40 +316,40 @@ public class ClientThread implements Runnable{
                                 Esto porque sin hacerlo ya solo me sale un jugador si imprimo activeUsers
                                 
                                 */
-                                currentRoom2.removeUserCardsFromGame(this);                                
-                                //eliminar de la SALA
-                                currentRoom2.removeUserFromRoom(this);
-                                
-                                //enviar actualizacion de numero de jugadores en la sala
-                                int total = currentRoom2.getActiveUsers();
-                                response = new ArrayList<>();
-                                response.add("ok");                            
-                                response.add(String.valueOf(total));
-                                response.add(idRoomJoined);
-                                resp = new Message("D", -1, response); 
-                                manager.sendMessageToAllClients(resp); 
-                                  
-                                //Enviar orden de ir a Home, enviar datos de las salas disponibles
-                                response = new ArrayList<>();
-                                response.add("ok");
-                                response.addAll(manager.getAllRoomsToString());                                
-                                resp = new Message("B", -1, response);
-                                sendMessage(resp);//Solo el cliente que presiono el boton salir será enviado a home
-                                                                
-                               
-                                
-                                if(currentRoom2.getActiveUsers()==1){                                                                                                                                                                     
-                                    /* esto notifica al jugador que se quedó solo en la sala                                   
-                                    */
+                                if(currentRoom2 != null){
+                                    currentRoom2.removeUserCardsFromGame(this);                                
+                                    //eliminar de la SALA
+                                    currentRoom2.removeUserFromRoom(this);
+                                    //enviar actualizacion de numero de jugadores en la sala
+                                    int total = currentRoom2.getActiveUsers();
+                                    response = new ArrayList<>();
+                                    response.add("ok");                            
+                                    response.add(String.valueOf(total));
+                                    response.add(idRoomJoined);
+                                    resp = new Message("D", -1, response); 
+                                    manager.sendMessageToAllClients(resp); 
 
-                                     response = new ArrayList<>();
-                                     response.add("ok");
-                                     resp = new Message("V", -1, response);
-                                     currentRoom2.sendMessageToRoomMembers(resp);                                                                   
-                                }else if(currentRoom2.getActiveUsers()>1){
-                                    System.err.println("UsuariosActivos: "+currentRoom2.getActiveUsers());
-                                    currentRoom2.reenvioInformacionUsuario();
+                                    //Enviar orden de ir a Home, enviar datos de las salas disponibles
+                                    response = new ArrayList<>();
+                                    response.add("ok");
+                                    response.addAll(manager.getAllRoomsToString());                                
+                                    resp = new Message("B", -1, response);
+                                    sendMessage(resp);//Solo el cliente que presiono el boton salir será enviado a home
+                                    
+                                    if(currentRoom2.getActiveUsers()==1){                                                                                                                                                                     
+                                        /* esto notifica al jugador que se quedó solo en la sala                                   
+                                        */
+                                         response = new ArrayList<>();
+                                         response.add("ok");
+                                         resp = new Message("V", -1, response);
+                                         currentRoom2.sendMessageToRoomMembers(resp);                                                                   
+                                    }else if(currentRoom2.getActiveUsers()>1){                                    
+                                        currentRoom2.reenvioInformacionUsuario();
+                                    }
                                 }
+                                //Si currentRoom2 es null, se ha desconectado o ha presionado salir de la aplicacion
+                                //Esto se maneja en excepciones
+                                                                                                                                                                                              
                                 /* TAMBIEN HAY UN PROBLEMA EN GAMEROOM 
                                 en la funcion de reenvioInformacion, y es el mism problema (ve a ella a leer lo q escribi) 
 

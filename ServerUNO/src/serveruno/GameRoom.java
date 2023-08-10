@@ -380,8 +380,7 @@ public class GameRoom{
         }
     }
     //Elimina un jugador de la sala
-    public void removeUserFromRoom(ClientThread usr){
-        //removeUserCardsFromGame(usr);
+    public void removeUserFromRoom(ClientThread usr){        
         players.remove(usr);
         if(activeUsers > 0)
             activeUsers--;        

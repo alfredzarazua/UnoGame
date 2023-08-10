@@ -102,6 +102,14 @@ public class ClientManager {
         System.out.println("\tListener Thread killed: id = "+id);
     }
     
+    public Boolean checkIfLoggedIn(String username){
+        for (ClientThread obj : clientsList) { 
+            if(obj.getUsername() != null && obj.getUsername().equals(username))
+                return true;
+        }
+        return false;
+    }
+    
     public Boolean addUserToRoom(ClientThread user, String roomId){
         System.out.println("\tAdding user "+user.getSocket().getInetAddress() + " to room: "+roomId);
         GameRoom destinyRoom = null;
@@ -146,9 +154,11 @@ public class ClientManager {
     
     
     public GameRoom getMyCurrentRoom(String roomId){
-        for (GameRoom room : serverRooms) {
-            if(room.getRoomId().equals(roomId)){
-                return room;
+        if(roomId != null){
+            for (GameRoom room : serverRooms) {
+                if(room.getRoomId().equals(roomId)){
+                    return room;
+                }
             }
         }
         return null;
