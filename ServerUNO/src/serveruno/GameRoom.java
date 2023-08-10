@@ -381,15 +381,16 @@ public class GameRoom{
     }
     //Elimina un jugador de la sala
     public void removeUserFromRoom(ClientThread usr){
+        //removeUserCardsFromGame(usr);
         players.remove(usr);
-        activeUsers--;        
+        if(activeUsers > 0)
+            activeUsers--;        
     }
     
     public void removeUserCardsFromGame(ClientThread usr){
         for(int i=0; i<usr.getSizeCartas(); i++){
             juegoCartas.regresaCartaUsuario(usr.getCarta(i));  
-        }  
-        players.remove(usr);
+        }        
         if(turno> players.size()-1){
            aumentoTurno();
         }

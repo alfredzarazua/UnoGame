@@ -26,7 +26,8 @@ public class ServerUNO {
         // si el servidor maneja 1 sala unicamente y al mismo tiempo escucha nuevas conexiones.
         
         
-        
+        //Bloque decodigo para aceptar conexiones de clientes(Al servidor en general)
+        //para login/registro unicamente
         while (true) {
             Socket clientSocket = serverSocket.accept();
             ClientThread nc = new ClientThread(manager, clientSocket);

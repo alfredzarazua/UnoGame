@@ -291,6 +291,7 @@ public class GameController {
      }
     
     public void pressExit(ActionEvent event) throws IOException {
+        
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Salir");
         alert.setHeaderText("Salir de la partida");
@@ -312,7 +313,7 @@ public class GameController {
       
     
         
-    }
+}
     
     
     

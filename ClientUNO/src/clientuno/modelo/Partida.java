@@ -221,26 +221,24 @@ public class Partida extends ClientUNO{
         alert.setHeaderText("Salir del juego");
         alert.setContentText("¿Deseas salir de la aplicación?");
         
-        //Notificar al servidor que el usuario salió de la aplicación
-        List <String> resp = new ArrayList<>();
-        resp.add("ok");
-        Message message= new Message("U", -1,resp);  
-        StageData data = (StageData) stage.getUserData();
-        try {
-            data.connection.sendMessage(message);
-        } catch (IOException ex) {
-            Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    
-        if(alert.showAndWait().get()==ButtonType.OK){                                    
+        if(alert.showAndWait().get()==ButtonType.OK){
+            //Notificar al servidor que el usuario salió de la aplicación
+            List <String> resp = new ArrayList<>();
+            resp.add("ok");
+            Message message= new Message("U", -1,resp);  
+            StageData data = (StageData) stage.getUserData();
             try {
+                data.connection.sendMessage(message);
                 sc.stopListening();
             } catch (IOException ex) {
-                
-            }
+                Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+            }             
             stage.close();
             System.err.println("UNO app succesfully closed");
         }
+         
+    
+        
     }
     
     public void setPartida(int turno){

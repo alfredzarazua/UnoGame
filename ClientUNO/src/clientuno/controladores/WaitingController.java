@@ -75,7 +75,7 @@ public class WaitingController {
         controller.renderUNOCards(data.partida.cartas);
         controller.inicializarPartida();
         controller.showUsernames(data.partida.getUsernames());
-        controller.setRoomName(roomData.getText());
+        controller.setRoomName(roomData.getText());        
         stage.show(); 
         
     }

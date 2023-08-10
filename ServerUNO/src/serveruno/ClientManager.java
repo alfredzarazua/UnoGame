@@ -29,14 +29,14 @@ Funciones principales
 */
 public class ClientManager {    
     private final List<GameRoom> serverRooms;
-    private final List<Thread> clientThreadsList;
+    private final List<Thread> threadsList;
     private final List<ClientThread> clientsList;
     private final Object lock;                                                  //Monitor de acceso a las listas
     
     
     public ClientManager(){        
         serverRooms = new ArrayList<>();
-        clientThreadsList = new ArrayList<>();
+        threadsList = new ArrayList<>();
         clientsList = new ArrayList<>();
         lock = new Object();
     }
@@ -46,15 +46,19 @@ public class ClientManager {
     }
     
     public void addClient(ClientThread client, Thread t){        
-        clientThreadsList.add(t);
+        threadsList.add(t);
         clientsList.add(client);
     }
+    
+    //NOTA: para la ejecucion local de la aplicacion las diferentes instancias de la aplicacion
+    //usan la ip localhost, por lo tanto se maneja como identificador el ThreadID
+    //***Para deployment de la aplicacion es mas recomendable usar IP como identificador en lugar de ThreadID
     //id del hilo listener, ip del cliente
     public void removeClient(long id, InetAddress ip, String idJoinedRoom){     //Este metodo se ejecuta cuando ocurre           
                                                                                 //una excepcion en el Hilo de un cliente
         ClientThread tmpClient = null;                                          //cuando socket se cierrra es por 2 situaciones     
         for (ClientThread obj : clientsList) {                                  //La primera es que el cliente cerró la aplicacion
-            if(obj.getSocket().getInetAddress().equals(ip)){                    //la segunda es que el cliente perdió la conexion a internet
+            if(obj.getClientId() == id){                    //la segunda es que el cliente perdió la conexion a internet
                 tmpClient = obj;                                                
                 break;
             }
@@ -83,15 +87,15 @@ public class ClientManager {
         }  
         synchronized (lock) {
             Thread tmpThread = null;
-            for (Thread cClient : clientThreadsList) {
+            for (Thread cClient : threadsList) {
                 if(cClient.threadId() == id){
                     tmpThread = cClient;
                     break;                
                 }                
             }
             if(tmpThread != null){            
-                    clientThreadsList.remove(tmpThread);
-                    tmpThread.interrupt();                      
+                    threadsList.remove(tmpThread); //Quitamos el hilo de la lista de hilos
+                    tmpThread.interrupt();         //Liberamos los recursos deteniendo la ejecucion del hilo               
             }
         }
                         

@@ -44,7 +44,7 @@ public final class ServerConnection {
     
     //Iniciar conexion al servidor
     public void connectToServer(Partida current) throws IOException{        
-        String hostname = "192.168.1.165";  
+        String hostname = "localhost";  
         int portNumber = 3000;                              //puerto
         socket = new Socket(hostname, portNumber);  
                 
